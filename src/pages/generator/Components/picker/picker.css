@@ -1,0 +1,29 @@
+/* OpcionesHorizontal.css */
+
+.opciones-horizontal-container {
+  overflow-x: auto; /* Agrega una barra de desplazamiento horizontal si es necesario */
+}
+
+.opciones-scroll {
+  display: flex;
+}
+
+.opcion {
+  width: 100px;
+  min-width: 100px;
+  max-width: 100px;
+  height: 100px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.opcion:hover {
+  background-color: #d93f47;
+  cursor: pointer;
+}
+
+/* Ajusta los estilos según tus preferencias */
