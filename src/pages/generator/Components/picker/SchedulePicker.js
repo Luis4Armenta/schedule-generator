@@ -1,8 +1,11 @@
+
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './picker.css'
+import { useMyContext } from '../../../../MyContext';
 
 const SchedulePicker = () => {
+  const { apiData } = useMyContext();
   let arr = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19, 20];
 
   return (
@@ -13,8 +16,9 @@ const SchedulePicker = () => {
         <div className="card-group overflow-auto">
           <div className="opciones-scroll">
             {
-              arr.map(option => (
-                <div className="card opcion shadow-sm" key={option}>{option}</div>
+              
+              apiData.map((item, index) => (
+                <div className="card opcion shadow-sm" key={index}>{index+1}</div>
               ))
             }
           </div>

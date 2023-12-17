@@ -3,7 +3,7 @@ import React, { createContext, useContext, useState } from 'react';
 const MyContext = createContext();
 
 export const MyProvider = ({ children }) => {
-  const [apiData, setApiData] = useState(null);
+  const [apiData, setApiData] = useState([]);
 
   const updateApiData = (newData) => {
     setApiData(newData);
