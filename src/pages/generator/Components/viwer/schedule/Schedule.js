@@ -135,6 +135,7 @@ const Schedule = ({ selectedSchedule }) => {
             fin: session.end,
             teacher: course.teacher,
             subject: course.subject,
+            sequence: course.sequence,
             positiveScore: course.positiveScore,
           })
         }
