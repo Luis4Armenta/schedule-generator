@@ -1,7 +1,50 @@
-import React from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { json } from 'react-router-dom';
 
 const GeneratonForm = () => {
+  const [semester, setSemester] = useState(1);
+  const [startTime, setStartTime] = useState('07:00');
+  const [endTime, setEndTime] = useState('22:00');
+  const [credits, setCredits] = useState(100);
+  const [Message, setMessage] = useState("");
+
+  let handdleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      let res = await fetch("http://localhost:3000/schedules", {
+        method: "POST",
+        headers:  {'Content-Type':  'application/json'},
+        body: JSON.stringify({
+          "levels":["4"],
+          "semesters":["4"],
+          "start_time":"07:00",
+          "end_time":"15:00",
+          "career":"C",
+          "shifts":["M"],
+          "length":7,
+          "credits":100,
+          "available_uses":0,
+          "excluded_teachers":[],
+          "excluded_subjects":[],
+          "extra_subjects":[],
+          "required_subjects":[]
+        })
+      }
+
+      
+      );
+      let resJson = await res.json();
+      if (res.status === 200) {
+        console.log("User created successfully");
+        console.log(resJson);
+      } else {
+        console.log("Some error occured");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
       <div className="card shadow-sm p-3" style={{height: '100%'}}>
         <div className="card-body">
@@ -9,7 +52,7 @@ const GeneratonForm = () => {
             <p className='card-title text-center fs-4 fw-semibold'>Parametros</p>
             <hr className='w-90 shadow-sm'/>
           </div>
-          <form className="d-flex flex-column justify-content-between">
+          <form className="d-flex flex-column justify-content-between" onSubmit={handdleSubmit}>
               {/* Semestres - Checkbox */}
               <div className="form-group my-3 my-1">
                 <label className='fs-5 fw-medium'>Semestres:</label>
