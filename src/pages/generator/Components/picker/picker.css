@@ -26,4 +26,11 @@
   cursor: pointer;
 }
 
+.selected {
+  background-color: #d93f47; /* Color de fondo cuando está seleccionado */
+  color: black; /* Color del texto cuando está seleccionado */
+  /* Otros estilos adicionales según sea necesario */
+}
+
+
 /* Ajusta los estilos según tus preferencias */

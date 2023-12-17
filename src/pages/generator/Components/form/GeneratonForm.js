@@ -10,6 +10,7 @@ const GeneratonForm = () => {
   const [endTime, setEndTime] = useState('22:00');
   const [credits, setCredits] = useState(100);
   const [loading, setLoading] = useState(false);
+  const [availableUses, setAvailableUses] = useState(1);
 
   let handdleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ const GeneratonForm = () => {
         method: "POST",
         headers:  {'Content-Type':  'application/json'},
         body: JSON.stringify({
-          "levels":["4"],
+          "levels":semesters,
           "semesters":semesters,
           "start_time":startTime,
           "end_time":endTime,
@@ -27,7 +28,7 @@ const GeneratonForm = () => {
           "shifts":["M", "V"],
           "length":7,
           "credits":credits,
-          "available_uses":0,
+          "available_uses":availableUses,
           "excluded_teachers":[],
           "excluded_subjects":[],
           "extra_subjects":[],
@@ -98,11 +99,11 @@ const GeneratonForm = () => {
                 <label className='fs-6 fw-medium'>Tiempo:</label>
                 <div className="d-flex">
                   <div className="mr-2">
-                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" onChange={(e) => setStartTime(e.target.value)}/>
+                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" value={startTime} onChange={(e) => setStartTime(e.target.value)}/>
                   </div>
                   <p className='mx-1 fw font-monospace fs-4'> - </p>
                   <div>
-                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" onChange={(e) => setEndTime(e.target.value)}/>
+                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" value={endTime} onChange={(e) => setEndTime(e.target.value)}/>
                   </div>
                 </div>
               </div>
@@ -110,7 +111,11 @@ const GeneratonForm = () => {
               {/* Créditos - Input */}
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Créditos:</label>
-                <input type="number" className="form-control" name="creditos" onChange={(e) => setCredits(e.target.value)}/>
+                <input type="number" className="form-control" name="creditos" value={credits} onChange={(e) => setCredits(e.target.value)}/>
+              </div>
+              <div className="form-group my-1">
+                <label className='fs-6 fw-medium'>Usos disponibles:</label>
+                <input type="number" className="form-control" name="creditos" value={availableUses} onChange={(e) => setAvailableUses(e.target.value)}/>
               </div>
 
               {/* Botón de envío */}
