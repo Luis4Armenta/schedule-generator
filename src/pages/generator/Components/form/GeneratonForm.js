@@ -1,29 +1,32 @@
 import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { json } from 'react-router-dom';
+import './form.css';
+import { useMyContext } from '../../../../MyContext';
 
 const GeneratonForm = () => {
-  const [semester, setSemester] = useState(1);
+  const { updateApiData } = useMyContext();
+  const [semesters, setSemesters] = useState([]);
   const [startTime, setStartTime] = useState('07:00');
   const [endTime, setEndTime] = useState('22:00');
   const [credits, setCredits] = useState(100);
-  const [Message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
 
   let handdleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       let res = await fetch("http://localhost:3000/schedules", {
         method: "POST",
         headers:  {'Content-Type':  'application/json'},
         body: JSON.stringify({
           "levels":["4"],
-          "semesters":["4"],
-          "start_time":"07:00",
-          "end_time":"15:00",
+          "semesters":semesters,
+          "start_time":startTime,
+          "end_time":endTime,
           "career":"C",
-          "shifts":["M"],
+          "shifts":["M", "V"],
           "length":7,
-          "credits":100,
+          "credits":credits,
           "available_uses":0,
           "excluded_teachers":[],
           "excluded_subjects":[],
@@ -37,14 +40,29 @@ const GeneratonForm = () => {
       let resJson = await res.json();
       if (res.status === 200) {
         console.log("User created successfully");
+        updateApiData(resJson);
         console.log(resJson);
       } else {
         console.log("Some error occured");
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
+
+  const handleSemesters = (event) => {
+    let updatedSemesters = [...semesters];
+    if (event.target.checked) {
+      updatedSemesters = [...semesters, event.target.value];
+    } else {
+      updatedSemesters.splice(semesters.indexOf(event.target.value), 1)
+    }
+    setSemesters(updatedSemesters);
+    console.log(semesters)
+  }
+
   return (
       <div className="card shadow-sm p-3" style={{height: '100%'}}>
         <div className="card-body">
@@ -57,7 +75,7 @@ const GeneratonForm = () => {
               <div className="form-group my-3 my-1">
                 <label className='fs-5 fw-medium'>Semestres:</label>
                 <div>
-                  {[1, 2, 3, 4, 5, 6, 7, 8].map((semestre) => (
+                  {["1", "2", "3", "4", "5", "6", "7", "8"].map((semestre) => (
                     <div key={semestre} className="form-check form-check-inline">
                       <input
                         type="checkbox"
@@ -65,6 +83,7 @@ const GeneratonForm = () => {
                         id={`semestre${semestre}`}
                         name="semestres"
                         value={semestre}
+                        onChange={handleSemesters}
                       />
                       <label className="form-check-label" htmlFor={`semestre${semestre}`}>
                         {semestre}ro
@@ -79,11 +98,11 @@ const GeneratonForm = () => {
                 <label className='fs-5 fw-medium my-1'>Tiempo:</label>
                 <div className="d-flex">
                   <div className="mr-2">
-                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" />
+                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" onChange={(e) => setStartTime(e.target.value)}/>
                   </div>
                   <p className='mx-1 fw font-monospace fs-4'> - </p>
                   <div>
-                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" />
+                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" onChange={(e) => setEndTime(e.target.value)}/>
                   </div>
                 </div>
               </div>
@@ -91,7 +110,7 @@ const GeneratonForm = () => {
               {/* Créditos - Input */}
               <div className="form-group my-3">
                 <label className='fs-5 fw-medium my-1'>Créditos:</label>
-                <input type="number" className="form-control" name="creditos" />
+                <input type="number" className="form-control" name="creditos" onChange={(e) => setCredits(e.target.value)}/>
               </div>
 
               {/* Botón de envío */}
@@ -101,6 +120,11 @@ const GeneratonForm = () => {
                 </button>
               </div>
           </form>
+          {loading && (
+            <div className="modal" style={{ display: 'flex', position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', background: 'rgba(255, 255, 255, 0.8)', justifyContent: 'center', alignItems: 'center' }}>
+              <div className="loading-spinner"></div>
+            </div>
+          )}
         </div>
       </div>
   );
