@@ -16,7 +16,7 @@ const SchedulePicker = ({ onSelect }) => {
   return (
     <div className='card shadow-sm'>
       <div className='card-body'>
-        <h4 className='card-title text-left fw-semibold'>Tus mejores opciones</h4>
+        <p className='card-title text-left fw-medium fs-5'>Tus mejores opciones</p>
         <hr className='w-50 text-white-50 bg-dark shadow-sm'/>
         {apiData.length === 0 &&
           <div className='text-center text-body-secondary'>

@@ -145,22 +145,30 @@ const Schedule = ({ selectedSchedule }) => {
   loadEvents();
   return (
     <div className="container-fluid">
-      <div className="table-responsive overflow-auto" style={{height: '70vh'}}>
-        <table className="table table-bordered" style={{tableLayout: 'fixed'}}>
+      <div className="table-responsive overflow-auto m-3" style={{height: '60vh'}}>
+        {courses.length === 0 &&
+          <div className='w-100 h-100 rounded border-dark-subtle text-center d-flex flex-column align-items-center justify-content-center text-body-secondary' style={{border: '2px dashed'}}>
+            
+            <i class="bi bi-calendar4-week fs-1"></i>
+            <h2>Selecciona un horario para mostrar...</h2>
+          </div>
+        }
+
+        {courses.length !== 0 && <table className="table table-bordered" style={{tableLayout: 'fixed'}} >
           <thead>
             <tr>
-              <th className='text-center fs-5'>
+              <th className='text-center'>
                 Hora
               </th>
               {diasSemana.map((dia, index) => (
-                <th key={index} className='text-center fs-5'>{dia}</th>
+                <th key={index} className='text-center fs-6'>{dia}</th>
               ))}
             </tr>
           </thead>
           <tbody>
             {horasDia.map((hora, indexHora) => (
               <tr key={indexHora} style={{height: '10px'}}>
-                <th className='text-center'>{hora}</th>
+                <th className='text-center fs-6'>{hora}</th>
                 {diasSemana.map((dia, indexDia) => {
                   const evento = obtenerEvento(dia, hora);
                   if (evento) {
@@ -179,7 +187,7 @@ const Schedule = ({ selectedSchedule }) => {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table>}
       </div>
     </div>
   );

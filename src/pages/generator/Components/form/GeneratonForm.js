@@ -64,16 +64,16 @@ const GeneratonForm = () => {
   }
 
   return (
-      <div className="card shadow-sm p-3" style={{height: '100%'}}>
-        <div className="card-body">
+      <div className="card shadow-sm px-3 py-0 h-100">
+        <div className="card-body pt-1">
           <div className='position-relative'>
-            <p className='card-title text-center fs-4 fw-semibold'>Parametros</p>
-            <hr className='w-90 shadow-sm'/>
+            <p className='fs-4 text-center mt-2  mb-1 fw-medium'>Ajustes</p>
+            <hr className='mb-3 mt-1 text-gray-100 bg-dark shadow-sm w-90' />
           </div>
           <form className="d-flex flex-column justify-content-between" onSubmit={handdleSubmit}>
               {/* Semestres - Checkbox */}
-              <div className="form-group my-3 my-1">
-                <label className='fs-5 fw-medium'>Semestres:</label>
+              <div className="form-group my-1">
+                <label className='fs-6 fw-medium'>Semestres:</label>
                 <div>
                   {["1", "2", "3", "4", "5", "6", "7", "8"].map((semestre) => (
                     <div key={semestre} className="form-check form-check-inline">
@@ -94,8 +94,8 @@ const GeneratonForm = () => {
               </div>
 
               {/* Tiempo - Inputs para hora de inicio y hora de fin */}
-              <div className="form-group my-3">
-                <label className='fs-5 fw-medium my-1'>Tiempo:</label>
+              <div className="form-group my-1">
+                <label className='fs-6 fw-medium'>Tiempo:</label>
                 <div className="d-flex">
                   <div className="mr-2">
                     <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" onChange={(e) => setStartTime(e.target.value)}/>
@@ -108,13 +108,13 @@ const GeneratonForm = () => {
               </div>
 
               {/* Créditos - Input */}
-              <div className="form-group my-3">
-                <label className='fs-5 fw-medium my-1'>Créditos:</label>
+              <div className="form-group my-1">
+                <label className='fs-6 fw-medium'>Créditos:</label>
                 <input type="number" className="form-control" name="creditos" onChange={(e) => setCredits(e.target.value)}/>
               </div>
 
               {/* Botón de envío */}
-              <div className='d-grid'>
+              <div className='d-grid mt-3'>
                 <button type="submit" className="btn btn-outline-success btn-lg ">
                   Generar
                 </button>

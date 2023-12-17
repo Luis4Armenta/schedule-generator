@@ -9,8 +9,8 @@ const ScheduleViwer = ({ selectSchedule }) => {
       <div className='card-body p-2 h-100'>
         <div>
           <div className='row'>
-            <p className='fs-3 text-center mt-4  mb-0 mfw-semibold'>Horario</p>
-            <hr className='mb-4 mt-3 text-gray-100 bg-dark shadow-sm' style={{width: '85%', margin: '0 auto'}}/>
+            <p className='fs-4 text-center mt-1  mb-1 fw-medium'>Horario</p>
+            <hr className='mb-3 mt-1 text-gray-100 bg-dark shadow-sm' style={{width: '85%', margin: '0 auto'}}/>
           </div>
           <div className='row'>
             <div className='h-100'>
