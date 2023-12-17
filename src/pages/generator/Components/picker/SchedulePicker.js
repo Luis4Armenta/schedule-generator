@@ -18,6 +18,12 @@ const SchedulePicker = ({ onSelect }) => {
       <div className='card-body'>
         <h4 className='card-title text-left fw-semibold'>Tus mejores opciones</h4>
         <hr className='w-50 text-white-50 bg-dark shadow-sm'/>
+        {apiData.length === 0 &&
+          <div className='text-center text-body-secondary'>
+            <p><i class="bi bi-archive h1"></i></p>
+            <h2>Nada que mostrar por ahora</h2>
+          </div>
+        }
         <div className="card-group overflow-auto">
           <div className="opciones-scroll">
             {
