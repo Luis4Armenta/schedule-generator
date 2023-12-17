@@ -2,7 +2,7 @@ import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Schedule from './schedule/Schedule'
 
-const ScheduleViwer = () => {
+const ScheduleViwer = ({ selectSchedule }) => {
 
   return (
     <div className='card w-100 h-100'>
@@ -14,7 +14,7 @@ const ScheduleViwer = () => {
           </div>
           <div className='row'>
             <div className='h-100'>
-              <Schedule />
+              <Schedule selectedSchedule={selectSchedule}/>
             </div>
           </div>
 

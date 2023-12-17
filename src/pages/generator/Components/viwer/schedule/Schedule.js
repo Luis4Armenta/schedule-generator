@@ -1,7 +1,8 @@
 import React from 'react'
 import Session from './Session';
+import transformCourses from "./utils";
 
-const Schedule = () => {
+const Schedule = ({ selectedSchedule }) => {
   const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   const horasDia = [
     '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
@@ -12,63 +13,69 @@ const Schedule = () => {
 
   let coursesProps = {
   }
+  
+  let courses = []
+  if (selectedSchedule && selectedSchedule.courses) {
+    console.log('SIIIIIII')
+    courses = transformCourses(selectedSchedule.courses);
+  }
 
-  let courses = [
-    {
-      subject: 'Comunicación de datos',
-      teacher: 'Susana Cuevas Escobar',
-      positiveScore: 0.7,
-      sessions: [
-        {day: 'Lunes', start: '07:00', end: '09:00'},
-        {day: 'Miércoles', start: '07:00', end: '09:00'},
-      ]
-    },
-    {
-      subject: 'Bases de datos',
-      teacher: 'NONATO RAMIREZ SUSANA',
-      positiveScore: 0.9,
-      sessions: [
-        {day: 'Lunes', start: '09:00', end: '11:00'},
-        {day: 'Miércoles', start: '09:00', end: '11:00'},
-      ]
-    },
-    {
-      subject: 'Estadística',
-      teacher: 'CABAÑAS VILLANUEVA BRENDA AURORA',
-      positiveScore: 0.9,
-      sessions: [
-        {day: 'Lunes', start: '11:00', end: '13:00'},
-        {day: 'Miércoles', start: '11:00', end: '13:00'},
-      ]
-    },
-    {
-      subject: 'MODELOS DETERMINISTICOS DE INVESTIGACIÓN DE OPERACIONES',
-      teacher: 'GUERRERO HUERTA ARACELI',
-      positiveScore: 0.9,
-      sessions: [
-        {day: 'Lunes', start: '13:00', end: '15:00'},
-        {day: 'Miércoles', start: '13:00', end: '15:00'},
-      ]
-    },
-    {
-      subject: 'CONSTRUCCIÓN DE SOFTWARE',
-      teacher: 'CORTES NORIEGA MIGUEL ANGEL',
-      positiveScore: 0.9,
-      sessions: [
-        {day: 'Martes', start: '07:00', end: '08:00'},
-        {day: 'Jueves', start: '07:00', end: '09:00'},
-      ]
-    },
-    {
-      subject: 'CONTABILIDAD Y COSTOS',
-      teacher: 'MARTINEZ RAMIREZ ERLY',
-      positiveScore: 0.9,
-      sessions: [
-        {day: 'Martes', start: '12:00', end: '13:00'},
-        {day: 'Jueves', start: '11:00', end: '13:00'},
-      ]
-    },
-  ]
+  // let courses = [
+  //   {
+  //     subject: 'Comunicación de datos',
+  //     teacher: 'Susana Cuevas Escobar',
+  //     positiveScore: 0.7,
+  //     sessions: [
+  //       {day: 'Lunes', start: '07:00', end: '09:00'},
+  //       {day: 'Miércoles', start: '07:00', end: '09:00'},
+  //     ]
+  //   },
+  //   {
+  //     subject: 'Bases de datos',
+  //     teacher: 'NONATO RAMIREZ SUSANA',
+  //     positiveScore: 0.9,
+  //     sessions: [
+  //       {day: 'Lunes', start: '09:00', end: '11:00'},
+  //       {day: 'Miércoles', start: '09:00', end: '11:00'},
+  //     ]
+  //   },
+  //   {
+  //     subject: 'Estadística',
+  //     teacher: 'CABAÑAS VILLANUEVA BRENDA AURORA',
+  //     positiveScore: 0.9,
+  //     sessions: [
+  //       {day: 'Lunes', start: '11:00', end: '13:00'},
+  //       {day: 'Miércoles', start: '11:00', end: '13:00'},
+  //     ]
+  //   },
+  //   {
+  //     subject: 'MODELOS DETERMINISTICOS DE INVESTIGACIÓN DE OPERACIONES',
+  //     teacher: 'GUERRERO HUERTA ARACELI',
+  //     positiveScore: 0.9,
+  //     sessions: [
+  //       {day: 'Lunes', start: '13:00', end: '15:00'},
+  //       {day: 'Miércoles', start: '13:00', end: '15:00'},
+  //     ]
+  //   },
+  //   {
+  //     subject: 'CONSTRUCCIÓN DE SOFTWARE',
+  //     teacher: 'CORTES NORIEGA MIGUEL ANGEL',
+  //     positiveScore: 0.9,
+  //     sessions: [
+  //       {day: 'Martes', start: '07:00', end: '08:00'},
+  //       {day: 'Jueves', start: '07:00', end: '09:00'},
+  //     ]
+  //   },
+  //   {
+  //     subject: 'CONTABILIDAD Y COSTOS',
+  //     teacher: 'MARTINEZ RAMIREZ ERLY',
+  //     positiveScore: 0.9,
+  //     sessions: [
+  //       {day: 'Martes', start: '12:00', end: '13:00'},
+  //       {day: 'Jueves', start: '11:00', end: '13:00'},
+  //     ]
+  //   },
+  // ]
 
   // Datos de eventos
   let eventos = [
