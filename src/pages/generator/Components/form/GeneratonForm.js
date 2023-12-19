@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './form.css';
 import { useMyContext } from '../../../../MyContext';
+import Modal from 'react-modal';
 
 const GeneratonForm = () => {
   const { updateApiData } = useMyContext();
@@ -11,6 +12,29 @@ const GeneratonForm = () => {
   const [credits, setCredits] = useState(100);
   const [loading, setLoading] = useState(false);
   const [availableUses, setAvailableUses] = useState(1);
+  const [excludedTeacherInput, setExcludedTeacherInput] = useState('');
+  const [excludedTeachers, setExcludedTeachers] = useState([]);
+  const [excludedTeachersModalOpen, setExcludedTeachersModalOpen] = useState(false);
+
+  const handleExcludedTeachers = () => {
+    console.log("Boton excluir profesores presionado!");
+    setExcludedTeachersModalOpen(true);
+  };
+
+  const closeExcludedTeachersModal = () => {
+    setExcludedTeachersModalOpen(false);
+  }
+
+  const handdleAddExcludedTeacher = () => {
+    setExcludedTeachers([...excludedTeachers, excludedTeacherInput]);
+    setExcludedTeacherInput('');
+  }
+
+  const handdleRemoveExcludedTeacher = (teacher) => {
+    const newArr = excludedTeachers.filter(item => item !== teacher);
+
+    setExcludedTeachers(newArr);
+  }
 
   let handdleSubmit = async (e) => {
     e.preventDefault();
@@ -29,7 +53,7 @@ const GeneratonForm = () => {
           "length":7,
           "credits":credits,
           "available_uses":availableUses,
-          "excluded_teachers":[],
+          "excluded_teachers":excludedTeachers,
           "excluded_subjects":[],
           "extra_subjects":[],
           "required_subjects":[]
@@ -52,6 +76,7 @@ const GeneratonForm = () => {
       setLoading(false);
     }
   }
+
 
   const handleSemesters = (event) => {
     let updatedSemesters = [...semesters];
@@ -117,6 +142,11 @@ const GeneratonForm = () => {
                 <label className='fs-6 fw-medium'>Usos disponibles:</label>
                 <input type="number" className="form-control" name="creditos" value={availableUses} onChange={(e) => setAvailableUses(e.target.value)}/>
               </div>
+              <div className="form-group my-1 d-grid mt-3">
+                <button type="button" className="btn btn-outline-success btn-lg " onClick={handleExcludedTeachers}>
+                  Excluir profesores
+                </button>
+              </div>
 
               {/* Botón de envío */}
               <div className='d-grid mt-3'>
@@ -131,6 +161,56 @@ const GeneratonForm = () => {
             </div>
           )}
         </div>
+        <Modal
+          isOpen={excludedTeachersModalOpen}
+          style={{content:{
+            width: '42%',
+            position: 'none'
+            // display: 'flex',
+            // backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            // justifyContent: 'center',
+            // alignItems: 'center'
+          }, overlay: {
+            display: 'flex',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}}
+        >
+          <div className='card'>
+            <h5 className='card-header text-center'>Excluir profesores</h5>
+            <div className='card-body'>
+              <div className='container-fluid'>
+
+              <div className='row mb-3'>
+                <div className='form-row'>
+                  <div className='row'>
+                    <div className='col-9'>
+                      <label>Ingresa el nombre del profesor a excluir:</label>
+                      <input type='text' className='form-control'  value={excludedTeacherInput} onChange={(e) => setExcludedTeacherInput(e.target.value)}></input>
+                    </div>
+                    <div className='col-3'>
+                      <button className='btn btn-primary w-100 mt-4' onClick={handdleAddExcludedTeacher}>Excluir</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div className='row my-2'>
+                <div className='d-flex flex-row-reverse flex-wrap'>
+                  {excludedTeachers.map((teacher, index) => (
+                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handdleRemoveExcludedTeacher(teacher)}>{teacher}</span>
+                  ))}
+
+                </div>
+              </div>
+              <div className='row d-flex '>
+                <button className='btn btn-outline-success mt-4' onClick={closeExcludedTeachersModal}>Guardar</button>
+              </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
       </div>
   );
 }
