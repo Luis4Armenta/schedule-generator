@@ -11,18 +11,30 @@ const GeneratonForm = () => {
   const [endTime, setEndTime] = useState('22:00');
   const [credits, setCredits] = useState(100);
   const [loading, setLoading] = useState(false);
+  const [excludedTeachers, setExcludedTeachers] = useState([]);
   const [availableUses, setAvailableUses] = useState(1);
   const [excludedTeacherInput, setExcludedTeacherInput] = useState('');
-  const [excludedTeachers, setExcludedTeachers] = useState([]);
   const [excludedTeachersModalOpen, setExcludedTeachersModalOpen] = useState(false);
+  const [excludedSubjects, setExcludedSubjects] = useState([]);
+  const [excludedSubjectsInput, setExcludedSubjectInput] = useState('');
+  const [excludedSubjectModalOpen, setExcludedSubjectModalOpen] = useState(false);
 
   const handleExcludedTeachers = () => {
     console.log("Boton excluir profesores presionado!");
     setExcludedTeachersModalOpen(true);
   };
 
+  const handleExcludedSubjects = () => {
+    console.log("Boton excluir profesores presionado!");
+    setExcludedSubjectModalOpen(true);
+  };
+
   const closeExcludedTeachersModal = () => {
     setExcludedTeachersModalOpen(false);
+  }
+
+  const closeExcludedSubjectsModal = () => {
+    setExcludedSubjectModalOpen(false);
   }
 
   const handdleAddExcludedTeacher = () => {
@@ -30,10 +42,21 @@ const GeneratonForm = () => {
     setExcludedTeacherInput('');
   }
 
+  const handdleAddExcludedSubject = () => {
+    setExcludedSubjects([...excludedSubjects, excludedSubjectsInput]);
+    setExcludedTeacherInput('');
+  }
+
   const handdleRemoveExcludedTeacher = (teacher) => {
     const newArr = excludedTeachers.filter(item => item !== teacher);
 
     setExcludedTeachers(newArr);
+  }
+
+  const handdleRemoveExcludedSubeject = (subject) => {
+    const newArr = excludedSubjects.filter(item => item !== subject);
+
+    setExcludedSubjects(newArr);
   }
 
   let handdleSubmit = async (e) => {
@@ -54,7 +77,7 @@ const GeneratonForm = () => {
           "credits":credits,
           "available_uses":availableUses,
           "excluded_teachers":excludedTeachers,
-          "excluded_subjects":[],
+          "excluded_subjects":excludedSubjects,
           "extra_subjects":[],
           "required_subjects":[]
         })
@@ -147,6 +170,11 @@ const GeneratonForm = () => {
                   Excluir profesores
                 </button>
               </div>
+              <div className="form-group my-1 d-grid mt-3">
+                <button type="button" className="btn btn-outline-success btn-lg " onClick={handleExcludedSubjects}>
+                  Excluir materias
+                </button>
+              </div>
 
               {/* Botón de envío */}
               <div className='d-grid mt-3'>
@@ -166,10 +194,6 @@ const GeneratonForm = () => {
           style={{content:{
             width: '42%',
             position: 'none'
-            // display: 'flex',
-            // backgroundColor: 'rgba(255, 255, 255, 0.8)',
-            // justifyContent: 'center',
-            // alignItems: 'center'
           }, overlay: {
             display: 'flex',
             backgroundColor: 'rgba(255, 255, 255, 0.8)',
@@ -206,6 +230,52 @@ const GeneratonForm = () => {
               </div>
               <div className='row d-flex '>
                 <button className='btn btn-outline-success mt-4' onClick={closeExcludedTeachersModal}>Guardar</button>
+              </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          isOpen={excludedSubjectModalOpen}
+          style={{content:{
+            width: '42%',
+            position: 'none'
+          }, overlay: {
+            display: 'flex',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}}
+        >
+          <div className='card'>
+            <h5 className='card-header text-center'>Excluir asginaturas</h5>
+            <div className='card-body'>
+              <div className='container-fluid'>
+
+              <div className='row mb-3'>
+                <div className='form-row'>
+                  <div className='row'>
+                    <div className='col-9'>
+                      <label>Ingresa el nombre de la asignatura a excluir:</label>
+                      <input type='text' className='form-control'  value={excludedSubjectsInput} onChange={(e) => setExcludedSubjectInput(e.target.value)}></input>
+                    </div>
+                    <div className='col-3'>
+                      <button className='btn btn-primary w-100 mt-4' onClick={handdleAddExcludedSubject}>Excluir</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div className='row my-2'>
+                <div className='d-flex flex-row-reverse flex-wrap'>
+                  {excludedSubjects.map((subject, index) => (
+                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handdleRemoveExcludedSubeject(subject)}>{subject}</span>
+                  ))}
+
+                </div>
+              </div>
+              <div className='row d-flex '>
+                <button className='btn btn-outline-success mt-4' onClick={closeExcludedSubjectsModal}>Guardar</button>
               </div>
               </div>
             </div>
