@@ -165,16 +165,21 @@ const GeneratonForm = () => {
             alignItems: 'center'
           }}}
         >
-          <div className="card-group overflow-auto">
-              {careers.map((item, index) => (
-                <div
-                  className={`card opcion shadow-sm`}
-                  key={index}
-                  onClick={() => handleCareerSelect(item)}
-                >
-                  {item}
-                </div>
-              ))}
+          <div className='card shadow-sm'>
+            <div className='card-body'>
+              <p className='card-title text-left fw-medium fs-5'>Selecciona tu carrera</p>
+              <div className="card-group overflow-auto">
+                  {careers.map((item, index) => (
+                    <div
+                      className={`card opcion shadow-sm`}
+                      key={index}
+                      onClick={() => handleCareerSelect(item)}
+                    >
+                      {item}
+                    </div>
+                  ))}
+              </div>
+            </div>
           </div>
 
         </Modal>
