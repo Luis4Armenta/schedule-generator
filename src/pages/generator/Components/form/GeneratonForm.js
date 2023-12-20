@@ -30,7 +30,7 @@ const GeneratonForm = () => {
   const [extraSubjectInputSemester, setExtraSubjectInputSemester] = useState(0);
   const [extraSubjectsModalOpen, seteExtraSubjectsModalOpen] = useState(false);
 
-  const careers = ['C', 'A', 'N'];
+  const careers = ['A', 'C', 'F', 'I', 'N', 'S', 'T'];
 
   const handleExcludedTeachers = () => {
     setExcludedTeachersModalOpen(true);
@@ -168,7 +168,7 @@ const GeneratonForm = () => {
           <div className='card shadow-sm'>
             <div className='card-body'>
               <p className='card-title text-left fw-medium fs-5'>Selecciona tu carrera</p>
-              <div className="card-group overflow-auto">
+              <div className="card-group overflow-auto d-flex justify-content-start">
                   {careers.map((item, index) => (
                     <div
                       className={`card opcion shadow-sm`}
