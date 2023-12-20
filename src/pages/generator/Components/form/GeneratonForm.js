@@ -13,6 +13,9 @@ const GeneratonForm = () => {
   const [loading, setLoading] = useState(false);
   const [availableUses, setAvailableUses] = useState(1);
 
+  const [career, setCareer] = useState('');
+  const [careerModalOpen, setCareerModalOpen] = useState(true);
+
   const [excludedTeachers, setExcludedTeachers] = useState([]);
   const [excludedTeacherInput, setExcludedTeacherInput] = useState('');
   const [excludedTeachersModalOpen, setExcludedTeachersModalOpen] = useState(false);
@@ -26,6 +29,8 @@ const GeneratonForm = () => {
   const [extraSubjectInputLevel, setExtraSubjectInputLevel] = useState(0);
   const [extraSubjectInputSemester, setExtraSubjectInputSemester] = useState(0);
   const [extraSubjectsModalOpen, seteExtraSubjectsModalOpen] = useState(false);
+
+  const careers = ['C', 'A', 'N'];
 
   const handleExcludedTeachers = () => {
     setExcludedTeachersModalOpen(true);
@@ -100,7 +105,7 @@ const GeneratonForm = () => {
           "semesters":semesters,
           "start_time":startTime,
           "end_time":endTime,
-          "career":"C",
+          "career":career,
           "shifts":["M", "V"],
           "length":7,
           "credits":credits,
@@ -129,6 +134,11 @@ const GeneratonForm = () => {
     }
   }
 
+  const handleCareerSelect = (career) => {
+    setCareer(career);
+    setCareerModalOpen(false);
+  }
+
 
   const handleSemesters = (event) => {
     let updatedSemesters = [...semesters];
@@ -143,6 +153,31 @@ const GeneratonForm = () => {
 
   return (
       <div className="card shadow-sm px-3 py-0 h-100">
+        <Modal
+          isOpen={careerModalOpen}
+          style={{content:{
+            width: '42%',
+            position: 'none'
+          }, overlay: {
+            display: 'flex',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}}
+        >
+          <div className="card-group overflow-auto">
+              {careers.map((item, index) => (
+                <div
+                  className={`card opcion shadow-sm`}
+                  key={index}
+                  onClick={() => handleCareerSelect(item)}
+                >
+                  {item}
+                </div>
+              ))}
+          </div>
+
+        </Modal>
         <div className="card-body pt-1">
           <div className='position-relative'>
             <p className='fs-4 text-center mt-2  mb-1 fw-medium'>Ajustes</p>
