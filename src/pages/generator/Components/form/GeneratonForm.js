@@ -235,23 +235,24 @@ const GeneratonForm = () => {
                 <input type="number" className="form-control" name="creditos" value={availableUses} onChange={(e) => setAvailableUses(e.target.value)}/>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-success btn-lg " onClick={handleExcludedTeachers}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExcludedTeachers}>
                   Excluir profesores
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-success btn-lg " onClick={handleExcludedSubjects}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExcludedSubjects}>
                   Excluir asignaturas
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-success btn-lg " onClick={handleExtraSubjects}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExtraSubjects}>
                   Asignaturas Extra
                 </button>
               </div>
 
               {/* Botón de envío */}
               <div className='d-grid mt-3'>
+                <hr />
                 <button type="submit" className="btn btn-outline-success btn-lg ">
                   Generar
                 </button>
