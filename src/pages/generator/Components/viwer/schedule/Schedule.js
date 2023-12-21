@@ -16,7 +16,6 @@ const Schedule = ({ selectedSchedule }) => {
   
   let courses = []
   if (selectedSchedule && selectedSchedule.courses) {
-    console.log('SIIIIIII')
     courses = transformCourses(selectedSchedule.courses);
   }
 

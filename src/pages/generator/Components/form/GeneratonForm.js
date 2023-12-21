@@ -149,7 +149,7 @@ const GeneratonForm = () => {
       );
       let resJson = await res.json();
       if (res.status === 200) {
-        console.log("User created successfully");
+        console.log("Success");
         updateData(resJson);
         console.log(resJson);
       } else {
@@ -176,7 +176,6 @@ const GeneratonForm = () => {
       updatedSemesters.splice(semesters.indexOf(event.target.value), 1)
     }
     setSemesters(updatedSemesters);
-    console.log(semesters)
   }
 
   return (
