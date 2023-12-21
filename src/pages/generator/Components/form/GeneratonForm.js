@@ -196,7 +196,7 @@ const GeneratonForm = () => {
           <div className='card shadow-sm'>
             <div className='card-body'>
               <p className='card-title text-left fw-medium fs-5'>Selecciona tu carrera</p>
-              <div className="card-group">
+              <div className="card-group overflow-auto d-flex justify-content-center">
                   {careers.map((item, index) => (
                     <div
                       className={`card opcion1 shadow-sm text-center fs-6 p-4`}
