@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './form.css';
-import { useMyContext } from '../../../../MyContext';
 import Modal from 'react-modal';
+import MyContext from '../../../../MyContext';
 
 const GeneratonForm = () => {
-  const { updateApiData } = useMyContext();
+  const { updateData } = useContext(MyContext);
   const [semesters, setSemesters] = useState([]);
   const [startTime, setStartTime] = useState('07:00');
   const [endTime, setEndTime] = useState('22:00');
@@ -150,7 +150,7 @@ const GeneratonForm = () => {
       let resJson = await res.json();
       if (res.status === 200) {
         console.log("User created successfully");
-        updateApiData(resJson);
+        updateData(resJson);
         console.log(resJson);
       } else {
         console.log("Some error occured");

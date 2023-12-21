@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import HomePage from "./pages/homepage/homepage";
 import Generator from './pages/generator/Generator';
 import './app.css'
-import { MyProvider } from './MyContext';
+import MyProvider from './MyProvider';
 
 function App() {
   return (
