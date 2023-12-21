@@ -30,7 +30,35 @@ const GeneratonForm = () => {
   const [extraSubjectInputSemester, setExtraSubjectInputSemester] = useState(0);
   const [extraSubjectsModalOpen, seteExtraSubjectsModalOpen] = useState(false);
 
-  const careers = ['A', 'C', 'F', 'I', 'N', 'S', 'T'];
+  const careers = [
+    {
+      nombre: 'A. industrial',
+      clave: 'A'
+    }, 
+    {
+      nombre: 'C. de la Informática',
+      clave: 'C'
+    },
+    {
+      nombre: 'Ing Ferroviaria',
+      clave: 'F'
+    }, {
+      nombre: 'Ing Industrial',
+      clave: 'I'
+    },
+    {
+      nombre: 'Ing Informática',
+      clave: 'N'
+    },
+    {
+      nombre: 'Sistemas Automatrices',
+      clave: 'S'
+    },
+    {
+      nombre: 'Ing en Transporte',
+      clave: 'T'
+    }
+    ];
 
   const handleExcludedTeachers = () => {
     setExcludedTeachersModalOpen(true);
@@ -168,14 +196,17 @@ const GeneratonForm = () => {
           <div className='card shadow-sm'>
             <div className='card-body'>
               <p className='card-title text-left fw-medium fs-5'>Selecciona tu carrera</p>
-              <div className="card-group overflow-auto d-flex justify-content-center">
+              <div className="card-group">
                   {careers.map((item, index) => (
                     <div
-                      className={`card opcion shadow-sm`}
+                      className={`card opcion1 shadow-sm text-center fs-6 p-4`}
                       key={index}
-                      onClick={() => handleCareerSelect(item)}
+                      onClick={() => handleCareerSelect(item.clave)}
                     >
-                      {item}
+                      <p className='m-4'>
+                        {item.nombre}
+
+                      </p>
                     </div>
                   ))}
               </div>

@@ -31,10 +31,10 @@
   100% { transform: rotate(360deg); }
 }
 
-.opcion {
-  width: 100px;
-  min-width: 100px;
-  max-width: 100px;
+.opcion1 {
+  width: 200px;
+  min-width: 200px;
+  max-width: 200px;
   height: 100px;
   margin-right: 10px;
   display: flex;
@@ -44,7 +44,7 @@
   font-weight: bold;
 }
 
-.opcion:hover {
+.opcion1:hover {
   background-color: #d93f47;
   cursor: pointer;
 }
