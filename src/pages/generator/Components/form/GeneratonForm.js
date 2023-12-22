@@ -3,40 +3,50 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './form.css';
 import Modal from 'react-modal';
 import MyContext from '../../../../MyContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { addExcludedSubjects, addExcludedTeachers, addExtraSubject, addRequiredSubject, addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeExcludedSubjects, removeExcludedTeachers, removeExtraSubject, removeRequiredSubject, removeSemester, setCareer } from '../../../../store/slices/form/formSlice';
 
 const GeneratonForm = () => {
-  const { updateData } = useContext(MyContext);
-  const [semesters, setSemesters] = useState([]);
-  const [startTime, setStartTime] = useState('07:00');
-  const [endTime, setEndTime] = useState('22:00');
-  const [credits, setCredits] = useState(100);
-  const [loading, setLoading] = useState(false);
-  const [availableUses, setAvailableUses] = useState(1);
+  const dispatch = useDispatch();
 
-  const [career, setCareer] = useState('');
+  const semesters = useSelector(state => state.form.semesters);
+
+  const startTime = useSelector(state => state.form.startTime);
+  const endTime = useSelector(state => state.form.endTime);
+
+  const credits = useSelector(state => state.form.credits);
+  const career = useSelector(state => state.form.career);
+  const availableUses = useSelector(state => state.form.availableUses);
+  const courseLength = useSelector(state => state.form.courseLength);
+  
+  const excludedTeachers = useSelector(state => state.form.excludedTeachers);
+  const excludedSubjects = useSelector(state => state.form.excludedSubjects);
+  
+  const extraSubjects = useSelector(state => state.form.extraSubjects);
+  const requiredSubjects = useSelector(state => state.form.requiredSubjects);
+
+  
+  const { updateData } = useContext(MyContext);
+  const [loading, setLoading] = useState(false);
+  
   const [careerModalOpen, setCareerModalOpen] = useState(true);
 
-  const [excludedTeachers, setExcludedTeachers] = useState([]);
   const [excludedTeacherInput, setExcludedTeacherInput] = useState('');
   const [excludedTeachersModalOpen, setExcludedTeachersModalOpen] = useState(false);
 
-  const [excludedSubjects, setExcludedSubjects] = useState([]);
   const [excludedSubjectsInput, setExcludedSubjectInput] = useState('');
   const [excludedSubjectModalOpen, setExcludedSubjectModalOpen] = useState(false);
   
-  const [extraSubjects, setExtraSubjects] = useState([]);
   const [extraSubjectInputName, setExtraSubjectInputName] = useState('');
   const [extraSubjectInputLevel, setExtraSubjectInputLevel] = useState(0);
   const [extraSubjectInputSemester, setExtraSubjectInputSemester] = useState(0);
   const [extraSubjectsModalOpen, seteExtraSubjectsModalOpen] = useState(false);
 
-  const [requiredSubjects, setRequiredSubjects] = useState([]);
   const [requiredSubjectInputName, setRequiredSubjectInputName] = useState('');
   const [requiredSubjectInputLevel, setRequiredSubjectInputLevel] = useState(0);
   const [requiredSubjectInputSemester, setRequiredSubjectInputSemester] = useState(0);
   const [requiredSubjectsModalOpen, setRequiredaSubjectsModalOpen] = useState(false);
 
-  const [courseLength, setCourseLength] = useState(7);
 
   const careers = [
     {
@@ -68,52 +78,21 @@ const GeneratonForm = () => {
     }
     ];
 
-  const handleExcludedTeachers = () => {
-    setExcludedTeachersModalOpen(true);
-  };
-
-  const handleExcludedSubjects = () => {
-    setExcludedSubjectModalOpen(true);
-  };
-
-  const handleExtraSubjects = () => {
-    seteExtraSubjectsModalOpen(true);
-  }
-
-  const handleRequiredSubjects = () => {
-    setRequiredaSubjectsModalOpen(true);
-  }
-
-  const closeExcludedTeachersModal = () => {
-    setExcludedTeachersModalOpen(false);
-  }
-
-  const closeExcludedSubjectsModal = () => {
-    setExcludedSubjectModalOpen(false);
-  }
-
-  const closeExtraSubjectsModal = () => {
-    seteExtraSubjectsModalOpen(false);
-  }
-
-  const closeRequiredSubjectsModal = () => {
-    setRequiredaSubjectsModalOpen(false);
-  }
 
   const handdleAddExcludedTeacher = () => {
-    setExcludedTeachers([...excludedTeachers, excludedTeacherInput]);
+    dispatch( addExcludedTeachers(excludedTeacherInput) )
     setExcludedTeacherInput('');
   }
 
   const handdleAddExcludedSubject = () => {
-    setExcludedSubjects([...excludedSubjects, excludedSubjectsInput]);
-    setExcludedTeacherInput('');
+    dispatch( addExcludedSubjects(excludedSubjectsInput) )
+    setExcludedSubjectInput('');
   }
 
   const handleAddExtraSubject = () => {
     const newExtraSubject = [`${extraSubjectInputLevel}${career}M${extraSubjectInputSemester}`, extraSubjectInputName]
 
-    setExtraSubjects([...extraSubjects, newExtraSubject]);
+    dispatch( addExtraSubject(newExtraSubject) );
     setExtraSubjectInputName('');
     setExtraSubjectInputLevel(0);
     setExtraSubjectInputSemester(0);
@@ -122,34 +101,26 @@ const GeneratonForm = () => {
   const handleAddRequiredSubject = () => {
     const newRequiredSubject = [`${requiredSubjectInputLevel}${career}M${requiredSubjectInputSemester}`, requiredSubjectInputName]
 
-    setRequiredSubjects([...requiredSubjects, newRequiredSubject]);
+    dispatch( addRequiredSubject(newRequiredSubject) );
     setRequiredSubjectInputName('');
     setRequiredSubjectInputLevel(0);
     setRequiredSubjectInputSemester(0);
   }
 
   const handdleRemoveExcludedTeacher = (teacher) => {
-    const newArr = excludedTeachers.filter(item => item !== teacher);
-
-    setExcludedTeachers(newArr);
+    dispatch( removeExcludedTeachers(teacher) )
   }
 
   const handdleRemoveExcludedSubeject = (subject) => {
-    const newArr = excludedSubjects.filter(item => item !== subject);
-
-    setExcludedSubjects(newArr);
+    dispatch( removeExcludedSubjects(subject) )
   }
 
   const handleRemoveExtraSubject = (extraSubject) => {
-    const newArr = extraSubjects.filter(item => item !== extraSubject);
-
-    setExtraSubjects(newArr);
+    dispatch( removeExtraSubject(extraSubject) )
   }
 
   const handleRemoveRequiredSubject = (requiredSubject) => {
-    const newArr = requiredSubjects.filter(item => item !== requiredSubject);
-
-    setRequiredSubjects(newArr);
+    dispatch( removeRequiredSubject(requiredSubject) )
   }
 
   let handdleSubmit = async (e) => {
@@ -194,19 +165,17 @@ const GeneratonForm = () => {
   }
 
   const handleCareerSelect = (career) => {
-    setCareer(career);
+    dispatch(dispatch( setCareer(career) ))
     setCareerModalOpen(false);
   }
 
 
   const handleSemesters = (event) => {
-    let updatedSemesters = [...semesters];
     if (event.target.checked) {
-      updatedSemesters = [...semesters, event.target.value];
+      dispatch(addSemester(event.target.value));
     } else {
-      updatedSemesters.splice(semesters.indexOf(event.target.value), 1)
+      dispatch(removeSemester(event.target.value));
     }
-    setSemesters(updatedSemesters);
   }
 
   return (
@@ -277,11 +246,11 @@ const GeneratonForm = () => {
                 <label className='fs-6 fw-medium'>Tiempo:</label>
                 <div className="d-flex">
                   <div className="mr-2">
-                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" value={startTime} onChange={(e) => setStartTime(e.target.value)}/>
+                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" value={startTime} onChange={(e) => dispatch( changeStartTime(e.target.value) )}/>
                   </div>
                   <p className='mx-1 fw font-monospace fs-4'> - </p>
                   <div>
-                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" value={endTime} onChange={(e) => setEndTime(e.target.value)}/>
+                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" value={endTime} onChange={(e) => dispatch( changeEndTime(e.target.value) )}/>
                   </div>
                 </div>
               </div>
@@ -291,36 +260,36 @@ const GeneratonForm = () => {
                 <div className='row'>
                   <div className='col-6'>
                     <label className='fs-6 fw-medium'>Créditos:</label>
-                    <input type="number" className="form-control" name="creditos" value={credits} onChange={(e) => setCredits(e.target.value)}/>
+                    <input type="number" className="form-control" name="creditos" value={credits} onChange={(e) => dispatch( changeCredits(e.target.value) )}/>
                   </div>
                   <div className='col-6'>
                     <label className='fs-6 fw-medium'>Número de materias:</label>
-                    <input type="number" className="form-control" name="creditos" value={courseLength} onChange={(e) => setCourseLength(e.target.value)}/>
+                    <input type="number" className="form-control" name="creditos" value={courseLength} onChange={(e) => dispatch( changeCourseLength(Number(e.target.value)) )}/>
                   </div>
 
                 </div>
               </div>
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Usos disponibles:</label>
-                <input type="number" className="form-control" name="creditos" value={availableUses} onChange={(e) => setAvailableUses(e.target.value)}/>
+                <input type="number" className="form-control" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))}/>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExcludedTeachers}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setExcludedTeachersModalOpen(true)}}>
                   Excluir profesores
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExcludedSubjects}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setExcludedSubjectModalOpen(true)}}>
                   Excluir asignaturas
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExtraSubjects}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {seteExtraSubjectsModalOpen(true)}}>
                   Asignaturas opcionales
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleRequiredSubjects}>
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setRequiredaSubjectsModalOpen(true)}}>
                   Asiganturas requeridas
                 </button>
               </div>
@@ -379,7 +348,7 @@ const GeneratonForm = () => {
                 </div>
               </div>
               <div className='row d-flex '>
-                <button className='btn btn-outline-success mt-4' onClick={closeExcludedTeachersModal}>Guardar</button>
+                <button className='btn btn-outline-success mt-4' onClick={() => {setExcludedTeachersModalOpen(false)}}>Guardar</button>
               </div>
               </div>
             </div>
@@ -425,7 +394,7 @@ const GeneratonForm = () => {
                 </div>
               </div>
               <div className='row d-flex '>
-                <button className='btn btn-outline-success mt-4' onClick={closeExcludedSubjectsModal}>Guardar</button>
+                <button className='btn btn-outline-success mt-4' onClick={() => {setExcludedSubjectModalOpen(false)}}>Guardar</button>
               </div>
               </div>
             </div>
@@ -482,7 +451,7 @@ const GeneratonForm = () => {
                 </div>
               </div>
               <div className='row d-flex '>
-                <button className='btn btn-outline-success mt-4' onClick={closeExtraSubjectsModal}>Guardar</button>
+                <button className='btn btn-outline-success mt-4' onClick={() => {seteExtraSubjectsModalOpen(false)}}>Guardar</button>
               </div>
               </div>
             </div>
@@ -539,7 +508,7 @@ const GeneratonForm = () => {
                 </div>
               </div>
               <div className='row d-flex '>
-                <button className='btn btn-outline-success mt-4' onClick={closeRequiredSubjectsModal}>Guardar</button>
+                <button className='btn btn-outline-success mt-4' onClick={() => setRequiredaSubjectsModalOpen(false)}>Guardar</button>
               </div>
               </div>
             </div>
