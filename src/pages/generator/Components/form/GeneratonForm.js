@@ -30,6 +30,14 @@ const GeneratonForm = () => {
   const [extraSubjectInputSemester, setExtraSubjectInputSemester] = useState(0);
   const [extraSubjectsModalOpen, seteExtraSubjectsModalOpen] = useState(false);
 
+  const [requiredSubjects, setRequiredSubjects] = useState([]);
+  const [requiredSubjectInputName, setRequiredSubjectInputName] = useState('');
+  const [requiredSubjectInputLevel, setRequiredSubjectInputLevel] = useState(0);
+  const [requiredSubjectInputSemester, setRequiredSubjectInputSemester] = useState(0);
+  const [requiredSubjectsModalOpen, setRequiredaSubjectsModalOpen] = useState(false);
+
+  const [courseLength, setCourseLength] = useState(7);
+
   const careers = [
     {
       nombre: 'A. industrial',
@@ -72,6 +80,10 @@ const GeneratonForm = () => {
     seteExtraSubjectsModalOpen(true);
   }
 
+  const handleRequiredSubjects = () => {
+    setRequiredaSubjectsModalOpen(true);
+  }
+
   const closeExcludedTeachersModal = () => {
     setExcludedTeachersModalOpen(false);
   }
@@ -82,6 +94,10 @@ const GeneratonForm = () => {
 
   const closeExtraSubjectsModal = () => {
     seteExtraSubjectsModalOpen(false);
+  }
+
+  const closeRequiredSubjectsModal = () => {
+    setRequiredaSubjectsModalOpen(false);
   }
 
   const handdleAddExcludedTeacher = () => {
@@ -95,12 +111,21 @@ const GeneratonForm = () => {
   }
 
   const handleAddExtraSubject = () => {
-    const newExtraSubject = [`${extraSubjectInputLevel}CM${extraSubjectInputSemester}`, extraSubjectInputName]
+    const newExtraSubject = [`${extraSubjectInputLevel}${career}M${extraSubjectInputSemester}`, extraSubjectInputName]
 
     setExtraSubjects([...extraSubjects, newExtraSubject]);
     setExtraSubjectInputName('');
     setExtraSubjectInputLevel(0);
     setExtraSubjectInputSemester(0);
+  }
+
+  const handleAddRequiredSubject = () => {
+    const newRequiredSubject = [`${requiredSubjectInputLevel}${career}M${requiredSubjectInputSemester}`, requiredSubjectInputName]
+
+    setRequiredSubjects([...requiredSubjects, newRequiredSubject]);
+    setRequiredSubjectInputName('');
+    setRequiredSubjectInputLevel(0);
+    setRequiredSubjectInputSemester(0);
   }
 
   const handdleRemoveExcludedTeacher = (teacher) => {
@@ -121,6 +146,12 @@ const GeneratonForm = () => {
     setExtraSubjects(newArr);
   }
 
+  const handleRemoveRequiredSubject = (requiredSubject) => {
+    const newArr = requiredSubjects.filter(item => item !== requiredSubject);
+
+    setRequiredSubjects(newArr);
+  }
+
   let handdleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -135,13 +166,13 @@ const GeneratonForm = () => {
           "end_time":endTime,
           "career":career,
           "shifts":["M", "V"],
-          "length":7,
+          "length":courseLength,
           "credits":credits,
           "available_uses":availableUses,
           "excluded_teachers":excludedTeachers,
           "excluded_subjects":excludedSubjects,
           "extra_subjects":extraSubjects,
-          "required_subjects":[]
+          "required_subjects":requiredSubjects
         })
       }
 
@@ -257,8 +288,17 @@ const GeneratonForm = () => {
 
               {/* Créditos - Input */}
               <div className="form-group my-1">
-                <label className='fs-6 fw-medium'>Créditos:</label>
-                <input type="number" className="form-control" name="creditos" value={credits} onChange={(e) => setCredits(e.target.value)}/>
+                <div className='row'>
+                  <div className='col-6'>
+                    <label className='fs-6 fw-medium'>Créditos:</label>
+                    <input type="number" className="form-control" name="creditos" value={credits} onChange={(e) => setCredits(e.target.value)}/>
+                  </div>
+                  <div className='col-6'>
+                    <label className='fs-6 fw-medium'>Número de materias:</label>
+                    <input type="number" className="form-control" name="creditos" value={courseLength} onChange={(e) => setCourseLength(e.target.value)}/>
+                  </div>
+
+                </div>
               </div>
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Usos disponibles:</label>
@@ -276,7 +316,12 @@ const GeneratonForm = () => {
               </div>
               <div className="form-group my-1 d-grid mt-3">
                 <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleExtraSubjects}>
-                  Asignaturas Extra
+                  Asignaturas opcionales
+                </button>
+              </div>
+              <div className="form-group my-1 d-grid mt-3">
+                <button type="button" className="btn btn-outline-primary btn-lg " onClick={handleRequiredSubjects}>
+                  Asiganturas requeridas
                 </button>
               </div>
 
@@ -399,7 +444,7 @@ const GeneratonForm = () => {
           }}}
         >
           <div className='card'>
-            <h5 className='card-header text-center'>Asignaturas extra</h5>
+            <h5 className='card-header text-center'>Asignaturas opcionales</h5>
             <div className='card-body'>
               <div className='container-fluid'>
 
@@ -438,6 +483,63 @@ const GeneratonForm = () => {
               </div>
               <div className='row d-flex '>
                 <button className='btn btn-outline-success mt-4' onClick={closeExtraSubjectsModal}>Guardar</button>
+              </div>
+              </div>
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          isOpen={requiredSubjectsModalOpen}
+          style={{content:{
+            width: '42%',
+            position: 'none'
+          }, overlay: {
+            display: 'flex',
+            backgroundColor: 'rgba(255, 255, 255, 0.8)',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}}
+        >
+          <div className='card'>
+            <h5 className='card-header text-center'>Asignaturas requeridas</h5>
+            <div className='card-body'>
+              <div className='container-fluid'>
+
+              <div className='row mb-3'>
+                <div className='form-row'>
+                  <div className='row'>
+                    <div className='col-6'>
+                      <label>Nivel de la asginatura:</label>
+                      <input type='number' className='form-control'  value={requiredSubjectInputLevel} onChange={(e) => setRequiredSubjectInputLevel(e.target.value)}></input>
+                    </div>
+                    <div className='col-6'>
+                      <label>Semestre de la asginatura:</label>
+                      <input type='number' className='form-control'  value={requiredSubjectInputSemester} onChange={(e) => setRequiredSubjectInputSemester(e.target.value)}></input>
+                    </div>
+
+                  </div>
+                  <div className='row'>
+                    <div className='col-9'>
+                      <label>Nombre de la asignatura:</label>
+                      <input type='text' className='form-control'  value={requiredSubjectInputName} onChange={(e) => setRequiredSubjectInputName(e.target.value)}></input>
+                    </div>
+                    <div className='col-3'>
+                      <button className='btn btn-primary w-100 mt-4' onClick={handleAddRequiredSubject}>Agregar</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+              <div className='row my-2'>
+                <div className='d-flex flex-row-reverse flex-wrap'>
+                  {requiredSubjects.map((subject, index) => (
+                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handleRemoveRequiredSubject(subject)}>{subject[0]} {subject[1]}</span>
+                  ))}
+
+                </div>
+              </div>
+              <div className='row d-flex '>
+                <button className='btn btn-outline-success mt-4' onClick={closeRequiredSubjectsModal}>Guardar</button>
               </div>
               </div>
             </div>
