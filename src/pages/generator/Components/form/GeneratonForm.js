@@ -320,7 +320,7 @@ const GeneratonForm = () => {
               <div className='row my-2'>
                 <div className='d-flex flex-row-reverse flex-wrap'>
                   {excludedTeachers.map((teacher, index) => (
-                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handdleRemoveExcludedTeacher(teacher)}>{teacher}</span>
+                    <span className="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handdleRemoveExcludedTeacher(teacher)}>{teacher}</span>
                   ))}
 
                 </div>
@@ -366,7 +366,7 @@ const GeneratonForm = () => {
               <div className='row my-2'>
                 <div className='d-flex flex-row-reverse flex-wrap'>
                   {excludedSubjects.map((subject, index) => (
-                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handdleRemoveExcludedSubeject(subject)}>{subject}</span>
+                    <span className="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handdleRemoveExcludedSubeject(subject)}>{subject}</span>
                   ))}
 
                 </div>
@@ -423,7 +423,7 @@ const GeneratonForm = () => {
               <div className='row my-2'>
                 <div className='d-flex flex-row-reverse flex-wrap'>
                   {extraSubjects.map((subject, index) => (
-                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handleRemoveExtraSubject(subject)}>{subject[0]} {subject[1]}</span>
+                    <span className="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handleRemoveExtraSubject(subject)}>{subject[0]} {subject[1]}</span>
                   ))}
 
                 </div>
@@ -480,7 +480,7 @@ const GeneratonForm = () => {
               <div className='row my-2'>
                 <div className='d-flex flex-row-reverse flex-wrap'>
                   {requiredSubjects.map((subject, index) => (
-                    <span class="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handleRemoveRequiredSubject(subject)}>{subject[0]} {subject[1]}</span>
+                    <span className="badge bg-danger mx-1 my-1 excluded-teacher" index={index} onClick={() => handleRemoveRequiredSubject(subject)}>{subject[0]} {subject[1]}</span>
                   ))}
 
                 </div>

@@ -148,7 +148,7 @@ const Schedule = ({ selectedSchedule }) => {
         {courses.length === 0 &&
           <div className='w-100 h-100 rounded border-dark-subtle text-center d-flex flex-column align-items-center justify-content-center text-body-secondary' style={{border: '2px dashed'}}>
             
-            <i class="bi bi-calendar4-week fs-1"></i>
+            <i className="bi bi-calendar4-week fs-1"></i>
             <h2>Selecciona un horario para mostrar...</h2>
           </div>
         }
@@ -160,26 +160,26 @@ const Schedule = ({ selectedSchedule }) => {
                 Hora
               </th>
               {diasSemana.map((dia, index) => (
-                <th key={index} className='text-center fs-6'>{dia}</th>
+                <th key={dia} className='text-center fs-6'>{dia}</th>
               ))}
             </tr>
           </thead>
           <tbody>
-            {horasDia.map((hora, indexHora) => (
-              <tr key={indexHora} style={{height: '10px'}}>
-                <th className='text-center fs-6'>{hora}</th>
-                {diasSemana.map((dia, indexDia) => {
+            {horasDia.map((hora) => (
+              <tr key={hora} style={{height: '10px'}}>
+                <th key={hora} className='text-center fs-6'>{hora}</th>
+                {diasSemana.map((dia) => {
                   const evento = obtenerEvento(dia, hora);
                   if (evento) {
                     if (evento.show) {
                       return null;
                     } else {
                       evento.show = true;
-                      return <Session key={indexDia} session={evento}/>
+                      return <Session key={`${dia}_${hora}`} session={evento}/>
                     }
                   }
                   return (
-                    <td>
+                    <td key={`${dia}_${hora}`}>
                     </td>
                   );
                 })}
