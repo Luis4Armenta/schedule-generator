@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
 import './generator.css'
 
-import GeneratonForm from './Components/form/GeneratonForm';
 import SchedulePicker from './Components/picker/SchedulePicker';
 import ScheduleViwer from './Components/viwer/ScheduleViwer';
+import ScheduleGenerationForm from './Components/form/ScheduleGenerationForm';
 
 const Generator = () => {
   return (
@@ -17,7 +17,7 @@ const Generator = () => {
           <ScheduleViwer/>
         </div>
         <div className='col-sm-12 col-lg-3'>
-          <GeneratonForm />
+          <ScheduleGenerationForm />
         </div>
       </div>
       <div className='row m-2 my-3' style={{height: '20%'}}>
