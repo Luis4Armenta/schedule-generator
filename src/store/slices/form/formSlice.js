@@ -13,7 +13,8 @@ const initialState = {
   excludedTeachers: [],
   excludedSubjects: [],
   extraSubjects: [],
-  requiredSubjects: []
+  requiredSubjects: [],
+  isGenerating: false
 }
 
 export const formSlice = createSlice({
@@ -67,6 +68,12 @@ export const formSlice = createSlice({
     },
     removeRequiredSubject: (state, action) => {
       state.requiredSubjects.splice(state.requiredSubjects.indexOf(action.payload), 1)
+    },
+    startScheduleGeneration: (state) => {
+      state.isGenerating = true
+    },
+    finishScheduleGeneration: (state) => {
+      state.isGenerating = false
     }
   },
 })
@@ -80,6 +87,6 @@ export const { addSemester, removeSemester, changeStartTime, changeEndTime, setC
   removeExcludedSubjects, addExtraSubject,
   removeExtraSubject,
   addRequiredSubject,
-  removeRequiredSubject,} = formSlice.actions
+  removeRequiredSubject, startScheduleGeneration, finishScheduleGeneration} = formSlice.actions
 
 export default formSlice.reducer

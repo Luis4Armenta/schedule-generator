@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './form.css';
 import Modal from 'react-modal';
-import MyContext from '../../../../MyContext';
 import { useDispatch, useSelector } from 'react-redux';
 import { addExcludedSubjects, addExcludedTeachers, addExtraSubject, addRequiredSubject, addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeExcludedSubjects, removeExcludedTeachers, removeExtraSubject, removeRequiredSubject, removeSemester, setCareer } from '../../../../store/slices/form/formSlice';
+import { getSchedules } from '../../../../store/slices/form/thunks';
 
 const GeneratonForm = () => {
   const dispatch = useDispatch();
@@ -24,11 +24,10 @@ const GeneratonForm = () => {
   
   const extraSubjects = useSelector(state => state.form.extraSubjects);
   const requiredSubjects = useSelector(state => state.form.requiredSubjects);
+  
+  
+  const loading = useSelector(state => state.form.isGenerating);
 
-  
-  const { updateData } = useContext(MyContext);
-  const [loading, setLoading] = useState(false);
-  
   const [careerModalOpen, setCareerModalOpen] = useState(true);
 
   const [excludedTeacherInput, setExcludedTeacherInput] = useState('');
@@ -123,45 +122,24 @@ const GeneratonForm = () => {
     dispatch( removeRequiredSubject(requiredSubject) )
   }
 
-  let handdleSubmit = async (e) => {
+  let handdleSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
-    try {
-      let res = await fetch("http://localhost:3000/schedules", {
-        method: "POST",
-        headers:  {'Content-Type':  'application/json'},
-        body: JSON.stringify({
-          "levels":semesters,
-          "semesters":semesters,
-          "start_time":startTime,
-          "end_time":endTime,
-          "career":career,
-          "shifts":["M", "V"],
-          "length":courseLength,
-          "credits":credits,
-          "available_uses":availableUses,
-          "excluded_teachers":excludedTeachers,
-          "excluded_subjects":excludedSubjects,
-          "extra_subjects":extraSubjects,
-          "required_subjects":requiredSubjects
-        })
-      }
+    const params = {
+      semesters,
+      semesters,
+      startTime,
+      endTime,
+      career,
+      courseLength,
+      credits,
+      availableUses,
+      excludedTeachers,
+      excludedSubjects,
+      extraSubjects,
+      requiredSubjects,
+    };
 
-      
-      );
-      let resJson = await res.json();
-      if (res.status === 200) {
-        console.log("Success");
-        updateData(resJson);
-        console.log(resJson);
-      } else {
-        console.log("Some error occured");
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
+    dispatch( getSchedules(params) );
   }
 
   const handleCareerSelect = (career) => {

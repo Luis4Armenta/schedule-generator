@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Schedule from './schedule/Schedule'
+import { useDispatch, useSelector } from 'react-redux';
+import { displaySchedule } from '../../../../store/slices/viwer/viwerSlice';
 
-const ScheduleViwer = ({ selectSchedule }) => {
+const ScheduleViwer = () => {
+  const dispatch = useDispatch();
+  
+  const schedulePicked = useSelector(state => state.picker.schedulePicked);
+  const displayedSchedule = useSelector(state => state.viwer.displayedSchedule);
+
+  useEffect(() => {
+    dispatch( displaySchedule( schedulePicked ) );
+  }, [schedulePicked, dispatch]);
+  
   return (
     <div className='card w-100 h-100'>
       <div className='card-body p-2 h-100'>
@@ -13,13 +24,13 @@ const ScheduleViwer = ({ selectSchedule }) => {
           </div>
           <div className='row'>
             <div className='h-100'>
-              <Schedule selectedSchedule={selectSchedule}/>
+              <Schedule selectedSchedule={displayedSchedule}/>
             </div>
           </div>
           <div className='row text-end w-100'>
             <div className='col-12'>
               <span className='d-inline'>
-                {selectSchedule ? <p>Popularidad: {selectSchedule.popularity.toFixed(4)} | Total de creditos requerido: {selectSchedule.total_credits_required}</p>
+                {displayedSchedule ? <p>Popularidad: {displayedSchedule.popularity.toFixed(4)} | Total de creditos requerido: {displayedSchedule.total_credits_required}</p>
                 : <p>Popularidad: 0.0000 | Total de creditos requerido: 0</p>}
               </span>
             </div>

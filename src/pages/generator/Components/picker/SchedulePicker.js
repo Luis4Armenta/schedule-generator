@@ -1,16 +1,18 @@
 
-import React, { useContext, useState } from 'react'
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './picker.css'
-import MyContext from '../../../../MyContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { pickSchedule } from '../../../../store/slices/picker/pickerSlice';
 
-const SchedulePicker = ({ onSelect }) => {
-  const { data } = useContext(MyContext);
-  const [selectedSchedule, setSelectedSchedule] = useState(null);
+const SchedulePicker = () => {
+  const dispatch = useDispatch();
+  
+  const data = useSelector(state => state.picker.options);
+  const selectedSchedule= useSelector(state => state.picker.schedulePicked);
 
   const handleScheduleSelect = (schedule) => {
-    setSelectedSchedule(schedule);
-    onSelect(schedule);
+    dispatch( pickSchedule(schedule) );
   };
 
   return (
