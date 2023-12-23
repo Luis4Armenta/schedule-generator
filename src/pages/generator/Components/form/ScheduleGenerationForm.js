@@ -98,13 +98,15 @@ const ScheduleGenerationForm = () => {
               {/* Tiempo - Inputs para hora de inicio y hora de fin */}
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Tiempo:</label>
-                <div className="d-flex">
-                  <div className="mr-2">
-                    <input type="text" className="form-control" name="horaInicio" placeholder="Ej. 09:00" value={startTime} onChange={(e) => dispatch( changeStartTime(e.target.value) )}/>
+                <div className="d-flex justify-content-betwee">
+                  <div className="mr-2 flex-fill">
+                    <input type="time" className="form-control" name="horaInicio" placeholder="Ej. 09:00" value={startTime} onChange={(e) => dispatch( changeStartTime(e.target.value) )}/>
                   </div>
-                  <p className='mx-1 fw font-monospace fs-4'> - </p>
-                  <div>
-                    <input type="text" className="form-control" name="horaFin" placeholder="Ej. 17:00" value={endTime} onChange={(e) => dispatch( changeEndTime(e.target.value) )}/>
+                  <div className=''>
+                    <p className='mx-1 fw font-monospace fs-4'> - </p>
+                  </div>
+                  <div className='flex-fill'>
+                    <input type="time" className="form-control" name="horaFin" placeholder="Ej. 17:00" value={endTime} onChange={(e) => dispatch( changeEndTime(e.target.value) )}/>
                   </div>
                 </div>
               </div>
