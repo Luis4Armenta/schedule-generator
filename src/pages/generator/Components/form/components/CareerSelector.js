@@ -48,10 +48,13 @@ const CareerSelector = () => {
       style={{
         content: {
           width: '42%',
-          position: 'none'
+          position: 'none',
+          background: 'none',
+          border: 'none',
+          padding: '0px'
         }, overlay: {
           display: 'flex',
-          backgroundColor: 'rgba(255, 255, 255, 0.8)',
+          backgroundColor: 'rgba(17, 17, 17, 0.5)',
           justifyContent: 'center',
           alignItems: 'center'
         }
