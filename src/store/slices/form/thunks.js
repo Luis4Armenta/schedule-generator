@@ -5,8 +5,9 @@ export const getSchedules = ( params ) => {
   return async ( dispatch, getState ) => {
     dispatch( startScheduleGeneration() );
 
+    const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
     try {
-      let res = await fetch("http://localhost:3000/schedules", {
+      let res = await fetch(`${apiEndpoint}/schedules`, {
         method: "POST",
         headers:  {'Content-Type':  'application/json'},
         body: JSON.stringify({
