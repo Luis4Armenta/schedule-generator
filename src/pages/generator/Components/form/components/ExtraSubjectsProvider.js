@@ -25,6 +25,7 @@ const ExtraSubjectsProvider = ({ isOpen, setIsOpen }) => {
     dispatch(removeExtraSubject(extraSubject))
   }
 
+  Modal.setAppElement('#root');
   return (
     <Modal
       isOpen={isOpen}

@@ -42,6 +42,8 @@ const CareerSelector = () => {
     setIsOpen(false);
   };
 
+
+  Modal.setAppElement('#root');
   return (
     <Modal
       isOpen={isOpen}

@@ -18,6 +18,7 @@ const TeacherExcluder = ({ isOpen, setIsOpen }) => {
     dispatch(removeExcludedTeachers(teacher));
   };
 
+  Modal.setAppElement('#root');
   return (
     <Modal
       isOpen={isOpen}

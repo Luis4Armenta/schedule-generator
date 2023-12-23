@@ -18,6 +18,7 @@ const SubjectExcluder = ({ isOpen, setIsOpen }) => {
     dispatch(removeExcludedSubjects(subject))
   }
 
+  Modal.setAppElement('#root');
   return (
     <Modal
       isOpen={isOpen}

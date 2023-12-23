@@ -25,6 +25,7 @@ const RequiredSubjectsProvider = ({ isOpen, setIsOpen }) => {
     dispatch(removeRequiredSubject(requiredSubject))
   }
 
+  Modal.setAppElement('#root');
   return (
     <Modal
       isOpen={isOpen}
