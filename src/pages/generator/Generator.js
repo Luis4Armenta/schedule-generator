@@ -10,18 +10,20 @@ import ScheduleGenerationForm from './Components/form/ScheduleGenerationForm';
 
 const Generator = () => {
   return (
-    <div className='container-fluid h-100'>
-      <div className='row m-2 my-3' style={{ height: '80%' }}>
-        <div className='col-sm-12 col-lg-9'>
-          <ScheduleViwer />
+    <div className='row'>
+      <div className='container-fluid h-100'>
+        <div className='row m-2 my-3' style={{ height: '80%' }}>
+          <div className='col-sm-12 col-lg-9'>
+            <ScheduleViwer />
+          </div>
+          <div className='col-sm-12 col-lg-3'>
+            <ScheduleGenerationForm />
+          </div>
         </div>
-        <div className='col-sm-12 col-lg-3'>
-          <ScheduleGenerationForm />
-        </div>
-      </div>
-      <div className='row m-2 my-3' style={{ height: '20%' }}>
-        <div className='col-sm-12 col-12'>
-          <SchedulePicker />
+        <div className='row m-2 my-3' style={{ height: '20%' }}>
+          <div className='col-sm-12 col-12'>
+            <SchedulePicker />
+          </div>
         </div>
       </div>
     </div>
