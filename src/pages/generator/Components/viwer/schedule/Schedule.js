@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import Session from './Session';
 import transformCourses from "./utils";
 
-const Schedule = ({ selectedSchedule }) => {
+const Schedule = forwardRef((props, ref) => {
   const diasSemana = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
   const horasDia = [
     '07:00', '07:30', '08:00', '08:30', '09:00', '09:30', '10:00', '10:30',
@@ -10,6 +10,7 @@ const Schedule = ({ selectedSchedule }) => {
     '15:00', '15:30', '16:00', '16:30', '17:00', '17:30', '18:00', '18:30',
     '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'
   ];
+  const {selectedSchedule} = props 
 
   let coursesProps = {
   }
@@ -153,7 +154,7 @@ const Schedule = ({ selectedSchedule }) => {
           </div>
         }
 
-        {courses.length !== 0 && <table className="table table-bordered" style={{tableLayout: 'fixed'}} >
+        {courses.length !== 0 && <table className="table table-bordered" style={{tableLayout: 'fixed'}} ref={ref}>
           <thead>
             <tr>
               <th className='text-center'>
@@ -190,6 +191,6 @@ const Schedule = ({ selectedSchedule }) => {
       </div>
     </div>
   );
-}
+});
 
 export default Schedule
