@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  options: [],
-  schedulePicked: null
+  mode: 'generated',
+  generatedSchedules: [],
+  schedules: [],
+  schedulePicked: null,
+  savedSchedules: [],
 };
 
 export const pickerSlice = createSlice({
@@ -10,15 +13,39 @@ export const pickerSlice = createSlice({
   initialState,
   reducers: {
     setSchedules: (state, action) => {
-      state.options = null;
-      state.options = action.payload;
+      state.schedules = action.payload;
     },
     pickSchedule: (state, action) => {
       state.schedulePicked = action.payload;
+    },
+    switchToSavedShedules: (state) => {
+      state.mode = 'saved';
+      state.schedules = state.savedSchedules;
+    },
+    switchToGeneratedSchedules:(state) => {
+      state.mode = 'generated'
+      state.schedules = state.generatedSchedules;
+    },
+    setSavedSchedules: (state, action) => {
+      state.savedSchedules = action.payload;
+    },
+    setGeneratedSchedules: (state, action) => {
+      state.generatedSchedules = action.payload;
+    },
+    addSavedSchedule: (state, action) => {
+      state.savedSchedules.push(action.payload);
     }
   }
 });
 
 
-export const { setSchedules, pickSchedule } = pickerSlice.actions;
+export const {
+  setSchedules,
+  pickSchedule,
+  switchToGeneratedSchedules,
+  switchToSavedShedules,
+  setGeneratedSchedules,
+  setSavedSchedules,
+  addSavedSchedule,
+} = pickerSlice.actions;
 export default pickerSlice.reducer;

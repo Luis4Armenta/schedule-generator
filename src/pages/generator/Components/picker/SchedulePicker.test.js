@@ -177,8 +177,11 @@ describe('SchedulePicker', () => {
 
     const store = mockStore({
       picker: {
-        options: scheduleOptions,
+        mode: 'generated',
+        generatedSchedules: scheduleOptions,
+        schedules: scheduleOptions,
         schedulePicked: null,
+        savedSchedules: [],
       },
     });
 
@@ -188,14 +191,17 @@ describe('SchedulePicker', () => {
       </Provider>
     );
 
-    expect(getByText('Tus mejores opciones')).toBeInTheDocument();
+    expect(getByText('Horarios generados')).toBeInTheDocument();
   });
 
   it('handles schedule selection', () => {
     const store = mockStore({
       picker: {
-        options: scheduleOptions,
+        mode: 'generated',
+        generatedSchedules: scheduleOptions,
+        schedules: scheduleOptions,
         schedulePicked: null,
+        savedSchedules: [],
       },
     });
 
@@ -214,8 +220,11 @@ describe('SchedulePicker', () => {
   it('correct number of schedules', () => {
     const store = mockStore({
       picker: {
-        options: scheduleOptions,
+        mode: 'generated',
+        generatedSchedules: scheduleOptions,
+        schedules: scheduleOptions,
         schedulePicked: null,
+        savedSchedules: [],
       },
     });
 

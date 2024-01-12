@@ -4,16 +4,23 @@ import Schedule from './schedule/Schedule'
 import { useDispatch, useSelector } from 'react-redux';
 import { displaySchedule } from '../../../../store/slices/viwer/viwerSlice';
 import { useReactToPrint } from 'react-to-print';
+import { addSavedSchedule } from '../../../../store/slices/picker/pickerSlice';
 
 const ScheduleViwer = () => {
   const dispatch = useDispatch();
+  const schedulePicked = useSelector(state => state.picker.schedulePicked);
+  const displayedSchedule = useSelector(state => state.viwer.displayedSchedule);
+  
   const componentRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => componentRef.current
   });
-
-  const schedulePicked = useSelector(state => state.picker.schedulePicked);
-  const displayedSchedule = useSelector(state => state.viwer.displayedSchedule);
+  
+  const handleSave = () => {
+    if (displayedSchedule) {
+      dispatch(addSavedSchedule(displayedSchedule));
+    }
+  }
 
   useEffect(() => {
     dispatch( displaySchedule( schedulePicked ) );
@@ -28,9 +35,12 @@ const ScheduleViwer = () => {
               <div className='w-100'>
                 <p className='fs-4 text-center mt-1  mb-1 fw-medium'>Horario</p>
               </div>
-              <div className=''>
-                <button className='btn btn-outline-primary' onClick={handlePrint} data-toggle="tooltip" data-placement="bottom" title="Imprimir">
-                  <i class="bi bi-printer fw-medium"></i>
+              <div className='d-flex'>
+                <button className='btn btn-outline-primary mx-1' onClick={handlePrint} data-toggle="tooltip" data-placement="bottom" title="Imprimir">
+                  <i className="bi bi-printer fw-medium"></i>
+                </button>
+                <button className='btn btn-outline-primary mx-1' onClick={handleSave} data-toggle="tooltip" data-placement="bottom" title="Guardar horario">
+                  <i className="bi bi-floppy fw-medium"></i>
                 </button>
               </div>
             </div>

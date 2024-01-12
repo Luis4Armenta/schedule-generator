@@ -1,4 +1,4 @@
-import { setSchedules } from "../picker/pickerSlice";
+import { setGeneratedSchedules, setSchedules, switchToGeneratedSchedules } from "../picker/pickerSlice";
 import { finishScheduleGeneration, startScheduleGeneration } from "./formSlice"
 
 export const getSchedules = ( params ) => {
@@ -30,6 +30,8 @@ export const getSchedules = ( params ) => {
       let resJson = await res.json();
       if (res.status === 200) {
         console.log(resJson);
+        dispatch( setGeneratedSchedules(resJson) );
+        dispatch( switchToGeneratedSchedules() );
         dispatch( setSchedules(resJson) );
         console.log('Success');
       } else {
