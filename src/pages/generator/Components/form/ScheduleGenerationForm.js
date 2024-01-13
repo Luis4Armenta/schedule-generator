@@ -112,36 +112,36 @@ const ScheduleGenerationForm = () => {
                 <div className='row'>
                   <div className='col-6'>
                     <label className='fs-6 fw-medium'>Créditos:</label>
-                    <input type="number" className="form-control" name="creditos" value={credits} onChange={(e) => dispatch( changeCredits(e.target.value) )}/>
+                    <input type="number" className="form-control form-control-sm" name="creditos" value={credits} onChange={(e) => dispatch( changeCredits(e.target.value) )}/>
                   </div>
                   <div className='col-6'>
                     <label className='fs-6 fw-medium'>Número de materias:</label>
-                    <input type="number" className="form-control" name="creditos" value={courseLength} onChange={(e) => dispatch( changeCourseLength(Number(e.target.value)) )}/>
+                    <input type="number" className="form-control form-control-sm" name="creditos" value={courseLength} onChange={(e) => dispatch( changeCourseLength(Number(e.target.value)) )}/>
                   </div>
 
                 </div>
               </div>
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Usos disponibles:</label>
-                <input type="number" className="form-control" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))}/>
+                <input type="number" className="form-control form-control-sm" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))}/>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setExcludedTeachersModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedTeachersModalOpen(true)}}>
                   Excluir profesores
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setExcludedSubjectModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedSubjectModalOpen(true)}}>
                   Excluir asignaturas
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setExtraSubjectsModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary" onClick={() => {setExtraSubjectsModalOpen(true)}}>
                   Asignaturas opcionales
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary btn-lg " onClick={() => {setRequiredSubjectsModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary " onClick={() => {setRequiredSubjectsModalOpen(true)}}>
                   Asiganturas requeridas
                 </button>
               </div>
