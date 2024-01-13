@@ -3,7 +3,7 @@ import React, { useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './picker.css'
 import { useDispatch, useSelector } from 'react-redux';
-import { pickSchedule, setSavedSchedules, switchToGeneratedSchedules, switchToSavedShedules } from '../../../../store/slices/picker/pickerSlice';
+import { pickSchedule, removeSavedSchedule, setSavedSchedules, switchToGeneratedSchedules, switchToSavedShedules } from '../../../../store/slices/picker/pickerSlice';
 
 const SchedulePicker = () => {
   const dispatch = useDispatch();
@@ -37,6 +37,11 @@ const SchedulePicker = () => {
     dispatch( pickSchedule(schedule) );
   };
 
+  const handleDeleteSchedule = (item) => {
+    dispatch( removeSavedSchedule(item) );
+    dispatch( switchToSavedShedules() );
+  }
+
   return (
     <div className='card shadow-sm'>
       <div className='card-body'>
@@ -63,15 +68,20 @@ const SchedulePicker = () => {
         ) : (
           <div className="card-group overflow-auto">
             <div className="opciones-scroll">
-              {data.map((item, index) => (
-                <div
-                  className={`card opcion shadow-sm ${selectedSchedule === item ? 'selected' : ''}`}
-                  key={index}
-                  onClick={() => handleScheduleSelect(item)}
-                >
+              {data.map((item, index) => ( <div className={`card opcion shadow-sm ${selectedSchedule === item ? 'selected': ''}`} key={index}>
+                <div className='opcion-content' onClick={() => handleScheduleSelect(item)}>
                   {index + 1}
                 </div>
-              ))}
+                {
+                  mode === 'saved' && (
+                  <p className="btn btn-danger btn-sm opcion-delete m-1" onClick={() => handleDeleteSchedule(item)}>
+                    X
+                  </p>
+
+                  )
+                }
+              </div>
+            ))}
             </div>
           </div>
         )}

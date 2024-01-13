@@ -34,6 +34,9 @@ export const pickerSlice = createSlice({
     },
     addSavedSchedule: (state, action) => {
       state.savedSchedules.push(action.payload);
+    },
+    removeSavedSchedule: (state, action) => {
+      state.savedSchedules.splice(state.savedSchedules.indexOf(action.payload), 1);
     }
   }
 });
@@ -47,5 +50,6 @@ export const {
   setGeneratedSchedules,
   setSavedSchedules,
   addSavedSchedule,
+  removeSavedSchedule,
 } = pickerSlice.actions;
 export default pickerSlice.reducer;
