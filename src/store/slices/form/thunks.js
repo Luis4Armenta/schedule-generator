@@ -16,7 +16,6 @@ export const getSchedules = ( params ) => {
           "start_time":params.startTime,
           "end_time":params.endTime,
           "career":params.career,
-          "shifts":["M", "V"],
           "length":params.courseLength,
           "credits":params.credits,
           "available_uses":params.availableUses,

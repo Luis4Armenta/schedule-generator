@@ -54,7 +54,7 @@ const ScheduleViwer = () => {
           <div className='row text-end w-100'>
             <div className='col-12'>
               <span className='d-inline'>
-                {displayedSchedule ? <p>Popularidad: {displayedSchedule.popularity.toFixed(4)} | Total de creditos requerido: {displayedSchedule.total_credits_required}</p>
+                {displayedSchedule ? <p>Popularidad: {displayedSchedule.avg_positive_score.toFixed(4)} | Total de creditos requerido: {displayedSchedule.total_credits_required}</p>
                 : <p>Popularidad: 0.0000 | Total de creditos requerido: 0</p>}
               </span>
             </div>

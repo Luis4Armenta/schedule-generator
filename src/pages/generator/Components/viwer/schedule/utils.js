@@ -1,28 +1,28 @@
 function transformCourses(inputCourses) {
   return inputCourses.map(course => {
-    const { teacher, subject, teacher_popularity, schedule, sequence } = course;
+    const { teacher, subject, teacher_positive_score, schedule, sequence } = course;
 
     const daysMapping = {
-      monday: 'Lunes',
-      tuesday: 'Martes',
-      wednesday: 'Miércoles',
-      thursday: 'Jueves',
-      friday: 'Viernes',
+      Monday: 'Lunes',
+      Tuesday: 'Martes',
+      Wednesday: 'Miércoles',
+      Thursday: 'Jueves',
+      Friday: 'Viernes',
     };
 
     const sessions = [];
+    schedule.forEach(session => {
+      sessions.push({
+        day: daysMapping[session.day],
+        start: session.start_time,
+        end: session.end_time,
+      })
 
-    for (const day in schedule) {
-      if (schedule[day]) {
-        sessions.push({
-          day: daysMapping[day],
-          start: schedule[day][0],
-          end: schedule[day][1]
-        });
-      }
-    }
+    });
 
-    const positiveScore = teacher_popularity;
+    const positiveScore = teacher_positive_score;
+
+    console.log(sessions);
 
     return {
       subject,
