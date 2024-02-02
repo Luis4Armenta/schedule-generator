@@ -22,8 +22,6 @@ function transformCourses(inputCourses) {
 
     const positiveScore = teacher_positive_score;
 
-    console.log(sessions);
-
     return {
       subject,
       sequence,

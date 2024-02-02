@@ -1,5 +1,6 @@
 import { setGeneratedSchedules, setSchedules, switchToGeneratedSchedules } from "../picker/pickerSlice";
 import { finishScheduleGeneration, startScheduleGeneration } from "./formSlice"
+import axios from 'axios';
 
 export const getSchedules = ( params ) => {
   return async ( dispatch, getState ) => {
@@ -7,10 +8,7 @@ export const getSchedules = ( params ) => {
 
     const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
     try {
-      let res = await fetch(`${apiEndpoint}/schedules`, {
-        method: "POST",
-        headers:  {'Content-Type':  'application/json'},
-        body: JSON.stringify({
+      let res = await axios.post(`${apiEndpoint}/schedules/`, {
           "levels":params.semesters,
           "semesters":params.semesters,
           "start_time":params.startTime,
@@ -23,22 +21,19 @@ export const getSchedules = ( params ) => {
           "excluded_subjects":params.excludedSubjects,
           "extra_subjects":params.extraSubjects,
           "required_subjects":params.requiredSubjects,
-        })
       }
       );
-      let resJson = await res.json();
+      let resJson = await res.data;
       if (res.status === 200) {
-        console.log(resJson);
         dispatch( setGeneratedSchedules(resJson) );
         dispatch( switchToGeneratedSchedules() );
         dispatch( setSchedules(resJson) );
-        console.log('Success');
       } else {
         dispatch( setSchedules([]) );
-        console.log("Error");
+        console.error("Error");
       }
     } catch (err) {
-      console.log(err);
+      console.error(err);
     } finally {
       dispatch( finishScheduleGeneration() );
     }
