@@ -9,30 +9,30 @@ const CareerSelector = () => {
 
   const careers = [
     {
-      nombre: 'A. industrial',
+      nombre: 'Administración industrial',
       clave: 'A'
     },
     {
-      nombre: 'C. de la Informática',
+      nombre: 'Ciencias de la Informática',
       clave: 'C'
     },
     {
-      nombre: 'Ing Ferroviaria',
+      nombre: 'Ingeniería Ferroviaria',
       clave: 'F'
     }, {
-      nombre: 'Ing Industrial',
+      nombre: 'Ingeniería Industrial',
       clave: 'I'
     },
     {
-      nombre: 'Ing Informática',
+      nombre: 'Ingeniería Informática',
       clave: 'N'
     },
     {
-      nombre: 'Sistemas Automatrices',
+      nombre: 'Ingeniería en Sistemas Automatrices',
       clave: 'S'
     },
     {
-      nombre: 'Ing en Transporte',
+      nombre: 'Ingeniería en Transporte',
       clave: 'T'
     }
   ];
@@ -49,7 +49,8 @@ const CareerSelector = () => {
       isOpen={isOpen}
       style={{
         content: {
-          width: '42%',
+          width: '80%',
+          height: '90%',
           position: 'none',
           background: 'none',
           border: 'none',
@@ -64,18 +65,25 @@ const CareerSelector = () => {
     >
       <div className='card shadow-sm'>
         <div className='card-body'>
-          <p className='card-title text-left fw-medium fs-5'>Selecciona tu carrera</p>
-          <div className="card-group overflow-auto d-flex justify-content-center">
+          <p className='card-title text-center fw-medium fs-5'>Selecciona tu carrera</p>
+          <hr className='w-90 text-white-50 bg-dark shadow-sm mt-0' style={{margin: 'auto'}}/>
+          <div className="row row-cols-1 row-cols-md-3 overflow-auto g-4 m-1">
             {careers.map((item, index) => (
-              <div
-                className={`card opcion1 shadow-sm text-center fs-6 p-4`}
-                key={index}
-                onClick={() => handleCareerSelect(item.clave)}
-              >
-                <p className='m-4'>
-                  {item.nombre}
+              <div className='col'>
+                <div
+                  className={`card shadow-sm text-center fs-6 p-4 h-100 opcion1`}
+                  key={index}
+                  onClick={() => handleCareerSelect(item.clave)}
+                >
+                  <div className='card-body w-100 d-flex align-items-center'>
+                    <p className='w-100 text-center '>
+                      {item.nombre}
 
-                </p>
+                    </p>
+
+                  </div>
+
+              </div>
               </div>
             ))}
           </div>
