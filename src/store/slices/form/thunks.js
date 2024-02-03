@@ -9,7 +9,7 @@ export const getSchedules = ( params ) => {
     const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
     try {
       let res = await axios.post(`${apiEndpoint}/schedules/`, {
-          "levels":params.semesters,
+          "levels":params.levels,
           "semesters":params.semesters,
           "start_time":params.startTime,
           "end_time":params.endTime,
@@ -22,18 +22,14 @@ export const getSchedules = ( params ) => {
           "extra_subjects":params.extraSubjects,
           "required_subjects":params.requiredSubjects,
       }
-      );
+      )
       let resJson = await res.data;
-      if (res.status === 200) {
-        dispatch( setGeneratedSchedules(resJson) );
-        dispatch( switchToGeneratedSchedules() );
-        dispatch( setSchedules(resJson) );
-      } else {
-        dispatch( setSchedules([]) );
-        console.error("Error");
-      }
+      dispatch( setGeneratedSchedules(resJson) );
+      dispatch( switchToGeneratedSchedules() );
+      dispatch( setSchedules(resJson) );
     } catch (err) {
-      console.error(err);
+      dispatch( setSchedules([]) );
+      console.error(err.message);
     } finally {
       dispatch( finishScheduleGeneration() );
     }
