@@ -24,7 +24,8 @@ const SubjectExcluder = ({ isOpen, setIsOpen }) => {
       isOpen={isOpen}
       style={{
         content: {
-          width: '42%',
+          width: '80%',
+          height: '90%',
           position: 'none',
           background: 'none',
           border: 'none',
