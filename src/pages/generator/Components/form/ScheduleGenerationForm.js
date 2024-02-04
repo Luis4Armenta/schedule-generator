@@ -116,7 +116,7 @@ const ScheduleGenerationForm = () => {
                         onChange={handleSemesters}
                       />
                       <label className="form-check-label" htmlFor={`semestre${semestre}`}>
-                        {semestre}ro
+                        {semestre}
                       </label>
                     </div>
                   ))}
