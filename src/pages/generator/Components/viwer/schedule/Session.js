@@ -11,6 +11,7 @@ const Session = ({ session }) => {
       <p className='text-center text-uppercase font-monospace m-1 fs-6 lh-sm'>{session.sequence}</p>
       <p className='text-center text-capitalize fw-medium m-1 fs-6 lh-sm'>{session.teacher}</p>
       <p className='text-center m-1 fs-6 lh-sm '>{session.positiveScore.toFixed(2)}</p>
+      <p className='text-center m-1 fs-6 lh-sm '>Lugares: {session.availability}</p>
     </td>
   );
 };

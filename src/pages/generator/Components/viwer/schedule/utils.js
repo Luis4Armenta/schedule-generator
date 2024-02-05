@@ -1,6 +1,6 @@
 function transformCourses(inputCourses) {
   return inputCourses.map(course => {
-    const { teacher, subject, teacher_positive_score, schedule, sequence } = course;
+    const { teacher, subject, teacher_positive_score, schedule, sequence, course_availability } = course;
 
     const daysMapping = {
       Monday: 'Lunes',
@@ -27,7 +27,8 @@ function transformCourses(inputCourses) {
       sequence,
       teacher,
       positiveScore, 
-      sessions
+      sessions,
+      course_availability
     }
   });
 }
