@@ -12,70 +12,11 @@ const Schedule = forwardRef((props, ref) => {
   ];
   const {selectedSchedule} = props 
 
-  let coursesProps = {
-  }
-  
+ 
   let courses = []
   if (selectedSchedule && selectedSchedule.courses) {
     courses = transformCourses(selectedSchedule.courses);
   }
-
-  // let courses = [
-  //   {
-  //     subject: 'Comunicación de datos',
-  //     teacher: 'Susana Cuevas Escobar',
-  //     positiveScore: 0.7,
-  //     sessions: [
-  //       {day: 'Lunes', start: '07:00', end: '09:00'},
-  //       {day: 'Miércoles', start: '07:00', end: '09:00'},
-  //     ]
-  //   },
-  //   {
-  //     subject: 'Bases de datos',
-  //     teacher: 'NONATO RAMIREZ SUSANA',
-  //     positiveScore: 0.9,
-  //     sessions: [
-  //       {day: 'Lunes', start: '09:00', end: '11:00'},
-  //       {day: 'Miércoles', start: '09:00', end: '11:00'},
-  //     ]
-  //   },
-  //   {
-  //     subject: 'Estadística',
-  //     teacher: 'CABAÑAS VILLANUEVA BRENDA AURORA',
-  //     positiveScore: 0.9,
-  //     sessions: [
-  //       {day: 'Lunes', start: '11:00', end: '13:00'},
-  //       {day: 'Miércoles', start: '11:00', end: '13:00'},
-  //     ]
-  //   },
-  //   {
-  //     subject: 'MODELOS DETERMINISTICOS DE INVESTIGACIÓN DE OPERACIONES',
-  //     teacher: 'GUERRERO HUERTA ARACELI',
-  //     positiveScore: 0.9,
-  //     sessions: [
-  //       {day: 'Lunes', start: '13:00', end: '15:00'},
-  //       {day: 'Miércoles', start: '13:00', end: '15:00'},
-  //     ]
-  //   },
-  //   {
-  //     subject: 'CONSTRUCCIÓN DE SOFTWARE',
-  //     teacher: 'CORTES NORIEGA MIGUEL ANGEL',
-  //     positiveScore: 0.9,
-  //     sessions: [
-  //       {day: 'Martes', start: '07:00', end: '08:00'},
-  //       {day: 'Jueves', start: '07:00', end: '09:00'},
-  //     ]
-  //   },
-  //   {
-  //     subject: 'CONTABILIDAD Y COSTOS',
-  //     teacher: 'MARTINEZ RAMIREZ ERLY',
-  //     positiveScore: 0.9,
-  //     sessions: [
-  //       {day: 'Martes', start: '12:00', end: '13:00'},
-  //       {day: 'Jueves', start: '11:00', end: '13:00'},
-  //     ]
-  //   },
-  // ]
 
   // Datos de eventos
   let eventos = [
@@ -90,6 +31,10 @@ const Schedule = forwardRef((props, ref) => {
     { bg: 'bg-info', text: 'text-white' },
     { bg: 'bg-light', text: 'text-black' },
     { bg: 'bg-dark', text: 'text-white' },
+    { bg: 'bg-success-subtle', text: 'text-success-emphasis' },
+    { bg: 'bg-danger-subtle', text: 'text-danger-emphasis' },
+    { bg: 'bg-warning-subtle', text: 'text-warning-emphasis' },
+    { bg: 'bg-info-subtle', text: 'text-info-emphasis' },
   ];
 
   // Función para verificar si hay un evento en un día y hora específicos
@@ -111,7 +56,9 @@ const Schedule = forwardRef((props, ref) => {
     return colorSeleccionado;
   }
 
+  let coursesProps = {}
   const loadEvents = () => {
+    
     for (const course of courses) {
         let props = coursesProps[course.subject];
 
