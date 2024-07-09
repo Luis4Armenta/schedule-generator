@@ -84,6 +84,7 @@ const Schedule = forwardRef((props, ref) => {
             subject: course.subject,
             sequence: course.sequence,
             positiveScore: course.positiveScore,
+            availability: course.course_availability,
           })
         }
       }

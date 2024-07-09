@@ -4,7 +4,7 @@ const initialState = {
   levels: [],
   semesters: [],
   startTime: '07:00',
-  endTime: '22:00',
+  endTime: '15:00',
   career: '',
   shifts:["M", "V"],
   courseLength: 7,
@@ -26,6 +26,12 @@ export const formSlice = createSlice({
     },
     removeSemester: (state, action) => {
       state.semesters.splice(state.semesters.indexOf(action.payload), 1)
+    },
+    addLevel: (state, action) => {
+      state.levels.push(action.payload)
+    },
+    removeLevel: (state, action) => {
+      state.levels.splice(state.levels.indexOf(action.payload), 1)
     },
     changeStartTime: (state, action) => {
       state.startTime = action.payload
@@ -78,7 +84,14 @@ export const formSlice = createSlice({
   },
 })
 
-export const { addSemester, removeSemester, changeStartTime, changeEndTime, setCareer,
+export const {
+  addSemester,
+  removeSemester,
+  addLevel,
+  removeLevel,
+  changeStartTime,
+  changeEndTime,
+  setCareer,
   changeCourseLength,
   changeCredits,
   changeAvailableUses,
@@ -87,6 +100,9 @@ export const { addSemester, removeSemester, changeStartTime, changeEndTime, setC
   removeExcludedSubjects, addExtraSubject,
   removeExtraSubject,
   addRequiredSubject,
-  removeRequiredSubject, startScheduleGeneration, finishScheduleGeneration} = formSlice.actions
+  removeRequiredSubject,
+  startScheduleGeneration,
+  finishScheduleGeneration
+} = formSlice.actions
 
 export default formSlice.reducer

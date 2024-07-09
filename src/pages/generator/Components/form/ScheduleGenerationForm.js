@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './form.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {  addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeSemester } from '../../../../store/slices/form/formSlice';
+import {  addLevel, addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeLevel, removeSemester } from '../../../../store/slices/form/formSlice';
 import { getSchedules } from '../../../../store/slices/form/thunks';
 import CareerSelector from './components/CareerSelector'
 import TeacherExcluder from './components/TeacherExcluder';
@@ -14,6 +14,7 @@ const ScheduleGenerationForm = () => {
   const dispatch = useDispatch();
 
   const career = useSelector(state => state.form.career);
+  const levels = useSelector(state => state.form.levels);
   const semesters = useSelector(state => state.form.semesters);
   const startTime = useSelector(state => state.form.startTime);
   const endTime = useSelector(state => state.form.endTime);
@@ -35,6 +36,7 @@ const ScheduleGenerationForm = () => {
   let handdleSubmit = (e) => {
     e.preventDefault();
     const params = {
+      levels,
       semesters,
       startTime,
       endTime,
@@ -52,6 +54,13 @@ const ScheduleGenerationForm = () => {
   }
 
 
+  const handleLevels = (event) => {
+    if (event.target.checked) {
+      dispatch(addLevel(event.target.value));
+    } else {
+      dispatch(removeLevel(event.target.value));
+    }
+  }
   const handleSemesters = (event) => {
     if (event.target.checked) {
       dispatch(addSemester(event.target.value));
@@ -73,7 +82,26 @@ const ScheduleGenerationForm = () => {
             <hr className='mb-3 mt-1 text-gray-100 bg-dark shadow-sm w-90' />
           </div>
           <form className="d-flex flex-column justify-content-between" onSubmit={handdleSubmit}>
-              {/* Semestres - Checkbox */}
+              <div className="form-group my-1">
+                <label className='fs-6 fw-medium'>Niveles:</label>
+                <div>
+                  {["1", "2", "3", "4", "5", "6", "7", "8"].map((nivel) => (
+                    <div key={nivel} className="form-check form-check-inline">
+                      <input
+                        type="checkbox"
+                        className="form-check-input"
+                        id={`nivel${nivel}`}
+                        name="niveles"
+                        value={nivel}
+                        onChange={handleLevels}
+                      />
+                      <label className="form-check-label" htmlFor={`nivel${nivel}`}>
+                        {nivel}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Semestres:</label>
                 <div>
@@ -88,14 +116,12 @@ const ScheduleGenerationForm = () => {
                         onChange={handleSemesters}
                       />
                       <label className="form-check-label" htmlFor={`semestre${semestre}`}>
-                        {semestre}ro
+                        {semestre}
                       </label>
                     </div>
                   ))}
                 </div>
               </div>
-
-              {/* Tiempo - Inputs para hora de inicio y hora de fin */}
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Tiempo:</label>
                 <div className="d-flex justify-content-between py-0 my-0">
