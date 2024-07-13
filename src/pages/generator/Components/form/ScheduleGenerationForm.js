@@ -106,7 +106,7 @@ const ScheduleGenerationForm = () => {
               </div>
             */}
               <div className="form-group my-1">
-                <label className='fs-6 fw-medium'>Semestres:</label>
+                <label className='fs-6 fw-medium'>Semestre al que perteneces:</label>
                 <div>
                   {["1", "2", "3", "4", "5", "6", "7", "8"].map((semestre) => (
                     <div key={semestre} className="form-check form-check-inline">
@@ -126,7 +126,7 @@ const ScheduleGenerationForm = () => {
                 </div>
               </div>
               <div className="form-group my-1">
-                <label className='fs-6 fw-medium'>Tiempo:</label>
+                <label className='fs-6 fw-medium'>Hora deseada de inicio y fin de clases:</label>
                 <div className="d-flex justify-content-between py-0 my-0">
                     <input title="Hora de entrada" type="time" className="form-control my-0 py-0" name="horaInicio" value={startTime} onChange={(e) => dispatch( changeStartTime(e.target.value) )} style={{height: '35px'}}/>
                   <div className=''>
@@ -139,20 +139,27 @@ const ScheduleGenerationForm = () => {
               {/* Créditos - Input */}
               <div className="form-group my-1">
                 <div className='row'>
-                  <div className='col-6'>
-                    <label className='fs-6 fw-medium'>Créditos:</label>
+                  <div className='col-4'>
+                    <label className='fs-6 fw-medium'>Tus créditos disponibles:</label>
+                  </div>
+                  <div className='col-4'>
+                    <label className='fs-6 fw-medium'>Número de materias:</label>
+                  </div>
+                  <div className='col-4'>
+                    <label className='fs-6 fw-medium'>Lugares disponibles:</label>
+                  </div>
+                </div>
+                <div className='row'>
+                  <div className='col-4'>
                     <input type="number" className="form-control form-control-sm" name="creditos" value={credits} onChange={(e) => dispatch( changeCredits(e.target.value) )}/>
                   </div>
-                  <div className='col-6'>
-                    <label className='fs-6 fw-medium'>Número de materias:</label>
+                  <div className='col-4'>
                     <input type="number" className="form-control form-control-sm" name="creditos" value={courseLength} onChange={(e) => dispatch( changeCourseLength(Number(e.target.value)) )}/>
                   </div>
-
+                  <div className="col-4">
+                    <input type="number" className="form-control form-control-sm" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))}/>
+                  </div>
                 </div>
-              </div>
-              <div className="form-group my-1">
-                <label className='fs-6 fw-medium'>Usos disponibles:</label>
-                <input type="number" className="form-control form-control-sm" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))}/>
               </div>
               <div className="form-group my-1 d-grid mt-3">
                 <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedTeachersModalOpen(true)}}>
