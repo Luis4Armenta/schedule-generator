@@ -106,7 +106,7 @@ const ScheduleGenerationForm = () => {
               </div>
             */}
               <div className="form-group my-1">
-                <label className='fs-6 fw-medium'>Semestre al que perteneces:</label>
+                <label className='fs-6 fw-medium  mb-1'>Semestre al que perteneces:</label>
                 <div>
                   {["1", "2", "3", "4", "5", "6", "7", "8"].map((semestre) => (
                     <div key={semestre} className="form-check form-check-inline">
@@ -126,19 +126,19 @@ const ScheduleGenerationForm = () => {
                 </div>
               </div>
               <div className="form-group my-1">
-                <label className='fs-6 fw-medium'>Hora deseada de inicio y fin de clases:</label>
+                <label className='fs-6 fw-medium mb-1'>Hora deseada de inicio y fin de clases:</label>
                 <div className="d-flex justify-content-between py-0 my-0">
-                    <input title="Hora de entrada" type="time" className="form-control my-0 py-0 text-center" name="horaInicio" value={startTime} onChange={(e) => dispatch( changeStartTime(e.target.value) )} style={{height: '35px'}}/>
+                    <input title="Hora de entrada" type="time" min="07:00:00" max="22:00:00" className="form-control my-0 py-0 text-center" name="horaInicio" value={startTime} onChange={(e) => dispatch( changeStartTime(e.target.value) )} style={{height: '35px'}}/>
                   <div className=''>
                     <p className='mx-1 fw font-monospace fs-4 py-0 my-0'> - </p>
                   </div>
-                    <input title="Hora de salida" type="time" className="form-control my-0 py-0 text-center" name="horaFin" value={endTime} onChange={(e) => dispatch( changeEndTime(e.target.value) )} style={{height: '35px'}}/>
+                    <input title="Hora de salida" type="time" min="07:00:00" max="22:00:00" className="form-control my-0 py-0 text-center" name="horaFin" value={endTime} onChange={(e) => dispatch( changeEndTime(e.target.value) )} style={{height: '35px'}}/>
                 </div>
               </div>
 
               {/* Créditos - Input */}
               <div className="form-group my-1">
-                <div className='row'>
+                <div className='row mb-1'>
                   <div className='col-4'>
                     <label className='fs-6 fw-medium'>Tus créditos disponibles:</label>
                   </div>
@@ -151,33 +151,33 @@ const ScheduleGenerationForm = () => {
                 </div>
                 <div className='row'>
                   <div className='col-4'>
-                    <input type="number" className="form-control form-control-sm text-center" name="creditos" value={credits} onChange={(e) => dispatch( changeCredits(e.target.value) )}/>
+                    <input type="number" min="0" max="100" className="form-control form-control-sm text-center" name="creditos" value={credits} onChange={(e) => dispatch( changeCredits(e.target.value) )} title="Créditos que tienes disponibles para este semestre"/>
                   </div>
                   <div className='col-4'>
-                    <input type="number" className="form-control form-control-sm text-center" name="creditos" value={courseLength} onChange={(e) => dispatch( changeCourseLength(Number(e.target.value)) )}/>
+                    <input type="number" min="2" max="12" className="form-control form-control-sm text-center" name="creditos" value={courseLength} onChange={(e) => dispatch( changeCourseLength(Number(e.target.value)) )} title="Número de materias que quieres que formen el horario."/>
                   </div>
                   <div className="col-4">
-                    <input type="number" className="form-control form-control-sm text-center" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))}/>
+                    <input type="number" min="1" className="form-control form-control-sm text-center" name="creditos" value={availableUses} onChange={(e) => dispatch( changeAvailableUses(e.target.value))} title="Cupo que quieres que tenga el horario"/>
                   </div>
                 </div>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedTeachersModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedTeachersModalOpen(true)}} title="Utiliza este botón para excluir profesores que no quieras que aparezcan en tus horarios por su nombre.">
                   Excluir profesores
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedSubjectModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary" onClick={() => {setExcludedSubjectModalOpen(true)}} title="Utiliza este botón para excluir asignaturas que ya has cursado o que no deseas meter en tus horarios.">
                   Excluir asignaturas
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary" onClick={() => {setExtraSubjectsModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary" onClick={() => {setExtraSubjectsModalOpen(true)}} title="Si quieres agregar una materia que puede o no aparecer en tus horarios (OPCIONAL) ponla aquí.">
                   Asignaturas opcionales
                 </button>
               </div>
               <div className="form-group my-1 d-grid mt-3">
-                <button type="button" className="btn btn-outline-primary " onClick={() => {setRequiredSubjectsModalOpen(true)}}>
+                <button type="button" className="btn btn-outline-primary " onClick={() => {setRequiredSubjectsModalOpen(true)}} title="Si quieres que una materia aparezca en todos tus horarios (OBLIGATORIA) ponla aquí">
                   Asiganturas requeridas
                 </button>
               </div>
@@ -185,7 +185,7 @@ const ScheduleGenerationForm = () => {
               {/* Botón de envío */}
               <div className='d-grid mt-3'>
                 <hr />
-                <button type="submit" className="btn btn-outline-success btn-lg ">
+                <button type="submit" className="btn btn-outline-success btn-lg " title="Generar todos los horarios">
                   Generar
                 </button>
               </div>
