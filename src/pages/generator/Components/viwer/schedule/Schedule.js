@@ -64,7 +64,7 @@ const Schedule = forwardRef((props, ref) => {
 
   return (
     <div className="container-fluid">
-      <div className="table-responsive overflow-auto m-3" style={{ height: '60vh' }}>
+      <div className="table-responsive overflow-auto m-3" style={{ height: '100vh',  maxHeight: '550px'}}>
         {(!selectedSchedule || selectedSchedule.courses.length === 0) &&
           <div className='w-100 h-100 rounded border-dark-subtle text-center d-flex flex-column align-items-center justify-content-center text-body-secondary' style={{ border: '2px dashed' }}>
             <i className="bi bi-calendar4-week fs-1"></i>

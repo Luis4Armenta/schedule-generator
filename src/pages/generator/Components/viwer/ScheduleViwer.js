@@ -29,7 +29,6 @@ const ScheduleViwer = () => {
   return (
     <div className='card w-100 h-100'>
       <div className='card-body p-2 h-100'>
-        <div>
           <div className='row'>
             <div className='d-flex px-5 align-items-center'>
               <div className='w-100'>
@@ -47,9 +46,7 @@ const ScheduleViwer = () => {
             <hr className='mb-3 mt-1 text-gray-100 bg-dark shadow-sm' style={{width: '85%', margin: '0 auto'}}/>
           </div>
           <div className='row'>
-            <div className='h-100'>
               <Schedule selectedSchedule={displayedSchedule} ref={componentRef}/>
-            </div>
           </div>
           <div className='row text-end w-100'>
             <div className='col-12'>
@@ -60,7 +57,6 @@ const ScheduleViwer = () => {
             </div>
           </div>
 
-        </div>
       </div>
     </div>
   )
