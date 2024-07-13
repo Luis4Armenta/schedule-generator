@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './form.css';
 import { useDispatch, useSelector } from 'react-redux';
-import {  addLevel, addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeLevel, removeSemester } from '../../../../store/slices/form/formSlice';
+// import {  addLevel, addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeLevel, removeSemester } from '../../../../store/slices/form/formSlice';
+import { addSemester, changeAvailableUses, changeCourseLength, changeCredits, changeEndTime, changeStartTime, removeSemester } from '../../../../store/slices/form/formSlice';
 import { getSchedules } from '../../../../store/slices/form/thunks';
 import CareerSelector from './components/CareerSelector'
 import TeacherExcluder from './components/TeacherExcluder';
@@ -54,13 +55,13 @@ const ScheduleGenerationForm = () => {
   }
 
 
-  const handleLevels = (event) => {
+  /*const handleLevels = (event) => {
     if (event.target.checked) {
       dispatch(addLevel(event.target.value));
     } else {
       dispatch(removeLevel(event.target.value));
     }
-  }
+  }*/
   const handleSemesters = (event) => {
     if (event.target.checked) {
       dispatch(addSemester(event.target.value));
@@ -82,6 +83,7 @@ const ScheduleGenerationForm = () => {
             <hr className='mb-3 mt-1 text-gray-100 bg-dark shadow-sm w-90' />
           </div>
           <form className="d-flex flex-column justify-content-between" onSubmit={handdleSubmit}>
+            {/*
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Niveles:</label>
                 <div>
@@ -100,8 +102,9 @@ const ScheduleGenerationForm = () => {
                       </label>
                     </div>
                   ))}
-                </div>
+                  </div>
               </div>
+            */}
               <div className="form-group my-1">
                 <label className='fs-6 fw-medium'>Semestres:</label>
                 <div>

@@ -9,7 +9,7 @@ export const getSchedules = ( params ) => {
     const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
     try {
       let res = await axios.post(`${apiEndpoint}/schedules/`, {
-          "levels":params.levels,
+          "levels":params.semesters,
           "semesters":params.semesters,
           "start_time":params.startTime,
           "end_time":params.endTime,
