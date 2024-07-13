@@ -22,11 +22,24 @@ const Schedule = forwardRef((props, ref) => {
     return endIndex - startIndex;
   };
 
-  // Encuentra la última hora con eventos
+  // Encuentra la primera y última hora con eventos
+  let firstHourIndex = -1;
   let lastHourIndex = -1;
+  
+  for (let i = 0; i < hours.length; i++) {
+    if (days.some(day => schedule[i][days.indexOf(day)] !== null)) {
+      if (i > 1) {
+        firstHourIndex = i - 1;
+      } else {
+        firstHourIndex = i;
+      }
+      break;
+    }
+  }
+
   for (let i = hours.length - 1; i >= 0; i--) {
     if (days.some(day => schedule[i][days.indexOf(day)] !== null)) {
-      lastHourIndex = i;
+      lastHourIndex = i + 1;
       break;
     }
   }
@@ -34,6 +47,11 @@ const Schedule = forwardRef((props, ref) => {
   // Si no hay eventos, muestra solo hasta la primera hora
   if (lastHourIndex === -1) {
     lastHourIndex = 0;
+  }
+
+  // Si no hay eventos, muestra solo desde la primera hora
+  if (firstHourIndex === -1) {
+    firstHourIndex = 0;
   }
 
   return (
@@ -57,11 +75,11 @@ const Schedule = forwardRef((props, ref) => {
               </tr>
             </thead>
             <tbody>
-              {hours.slice(0, lastHourIndex + 1).map((hour, hourIndex) => (
+              {hours.slice(firstHourIndex, lastHourIndex + 1).map((hour, hourIndex) => (
                 <tr key={hour} style={{ height: '10px' }}>
                   <th key={hour} className='text-center fs-6'>{hour}</th>
                   {days.map((day, dayIndex) => {
-                    const evento = schedule[hourIndex][dayIndex];
+                    const evento = schedule[firstHourIndex + hourIndex][dayIndex];
 
                     // Si es la primera vez que aparece el evento en este día
                     if (evento && !extraAttributes[evento.key].days) {
