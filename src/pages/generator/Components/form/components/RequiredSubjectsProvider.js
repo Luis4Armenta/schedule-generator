@@ -13,7 +13,7 @@ const RequiredSubjectsProvider = ({ isOpen, setIsOpen }) => {
   const [requiredSubjectInputSemester, setRequiredSubjectInputSemester] = useState(0);
 
   const handleAddRequiredSubject = () => {
-    const newRequiredSubject = [`${requiredSubjectInputLevel}${career}M${requiredSubjectInputSemester}`, requiredSubjectInputName]
+    const newRequiredSubject = [`${requiredSubjectInputLevel}${career}X${requiredSubjectInputSemester}X`, requiredSubjectInputName]
 
     dispatch(addRequiredSubject(newRequiredSubject));
     setRequiredSubjectInputName('');

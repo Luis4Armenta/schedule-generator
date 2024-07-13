@@ -13,7 +13,7 @@ const ExtraSubjectsProvider = ({ isOpen, setIsOpen }) => {
   const [extraSubjectInputSemester, setExtraSubjectInputSemester] = useState(0);
 
   const handleAddExtraSubject = () => {
-    const newExtraSubject = [`${extraSubjectInputLevel}${career}M${extraSubjectInputSemester}`, extraSubjectInputName]
+    const newExtraSubject = [`${extraSubjectInputLevel}${career}X${extraSubjectInputSemester}X`, extraSubjectInputName]
 
     dispatch(addExtraSubject(newExtraSubject));
     setExtraSubjectInputName('');
