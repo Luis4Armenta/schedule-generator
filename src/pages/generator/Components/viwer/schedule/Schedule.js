@@ -12,7 +12,7 @@ const Schedule = forwardRef((props, ref) => {
     '19:00', '19:30', '20:00', '20:30', '21:00', '21:30', '22:00'
   ];
 
-  const days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+  let days = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
 
   const { schedule, extraAttributes } = getEventsFromCourses(selectedSchedule ? selectedSchedule.courses : []);
 
@@ -54,6 +54,14 @@ const Schedule = forwardRef((props, ref) => {
     firstHourIndex = 0;
   }
 
+  // Verifica si hay eventos en sábado
+  const hasSaturdayEvents = hours.some(hour => schedule[hours.indexOf(hour)][days.indexOf('Sábado')] !== null);
+
+  // Si no hay eventos en sábado, elimina el sábado de los días
+  if (!hasSaturdayEvents) {
+    days = days.filter(day => day !== 'Sábado');
+  }
+
   return (
     <div className="container-fluid">
       <div className="table-responsive overflow-auto m-3" style={{ height: '60vh' }}>
@@ -68,7 +76,7 @@ const Schedule = forwardRef((props, ref) => {
           <table className="table table-bordered" style={{ tableLayout: 'fixed' }} ref={ref}>
             <thead>
               <tr>
-                <th className='text-center'>Hora</th>
+                <th className='text-center ' width="100px">Hora</th>
                 {days.map((day) => (
                   <th key={day} className='text-center fs-6'>{day}</th>
                 ))}
@@ -77,7 +85,7 @@ const Schedule = forwardRef((props, ref) => {
             <tbody>
               {hours.slice(firstHourIndex, lastHourIndex + 1).map((hour, hourIndex) => (
                 <tr key={hour} style={{ height: '10px' }}>
-                  <th key={hour} className='text-center fs-6'>{hour}</th>
+                  <th key={hour} className='text-center fs-6 ' width="100px">{hour}</th>
                   {days.map((day, dayIndex) => {
                     const evento = schedule[firstHourIndex + hourIndex][dayIndex];
 
