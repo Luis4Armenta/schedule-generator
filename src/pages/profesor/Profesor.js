@@ -19,8 +19,9 @@ const Profesor = () => {
 
   useEffect(() => {
     const fetchComments = async () => {
+      const apiEndpoint = process.env.REACT_APP_API_ENDPOINT;
       try {
-        const response = await axios.get(process.env.REACT_APP_API_ENDPOINT + '/teachers', {
+        const response = await axios.get(`${apiEndpoint}/teachers/`, {
           params: { teacher_name: name }
         });
         setComments(response.data.comments);
